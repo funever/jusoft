@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merger>
+
+    <dataSet config="main" >
+        <source path="E:\android_studio_workspace\jusoft\activeAndroid_orm\src\main\res" >
+            <file
+                name="ic_launcher"
+                path="E:\android_studio_workspace\jusoft\activeAndroid_orm\src\main\res\drawable-hdpi\ic_launcher.png"
+                qualifiers="hdpi"
+                type="drawable" />
+            <file
+                name="ic_launcher"
+                path="E:\android_studio_workspace\jusoft\activeAndroid_orm\src\main\res\drawable-ldpi\ic_launcher.png"
+                qualifiers="ldpi"
+                type="drawable" />
+            <file
+                name="ic_launcher"
+                path="E:\android_studio_workspace\jusoft\activeAndroid_orm\src\main\res\drawable-mdpi\ic_launcher.png"
+                qualifiers="mdpi"
+                type="drawable" />
+            <file
+                name="ic_launcher"
+                path="E:\android_studio_workspace\jusoft\activeAndroid_orm\src\main\res\drawable-xhdpi\ic_launcher.png"
+                qualifiers="xhdpi"
+                type="drawable" />
+            <file
+                path="E:\android_studio_workspace\jusoft\activeAndroid_orm\src\main\res\values\strings.xml"
+                qualifiers="" >
+                <string name="app_name" >TestsTest
+                </string>
+            </file>
+        </source>
+        <source path="E:\android_studio_workspace\jusoft\activeAndroid_orm\build\res\rs\release" />
+        <source path="E:\android_studio_workspace\jusoft\activeAndroid_orm\build\res\generated\release" />
+    </dataSet>
+    <dataSet config="release" >
+        <source path="E:\android_studio_workspace\jusoft\activeAndroid_orm\src\release\res" />
+    </dataSet>
+
+</merger>

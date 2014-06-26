@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+    <HorizontalScrollView 
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true"
+        >
+        <LinearLayout 
+            android:layout_width="wrap_content"
+        	android:layout_height="match_parent"
+        	android:orientation="vertical"
+            >
+            <include layout="@layout/detail_xjyh_item" android:visibility="gone"/>
+            <include layout="@layout/detail_wldw_item" android:visibility="gone"/>
+            <com.handmark.pulltorefresh.library.PullToRefreshListView 
+		        android:layout_width="fill_parent"
+		        android:layout_height="match_parent"
+		        android:divider="@drawable/list_devide"
+		        android:dividerHeight="1px"
+		    	android:id="@+id/entity_list"
+		    	android:listSelector="@drawable/list_style"
+		        android:cacheColorHint="#00000000"
+		        />
+          </LinearLayout>
+    </HorizontalScrollView>
+</LinearLayout><!-- From: file:/E:/android_studio_workspace/jusoft/justSoft_gjp/src/main/res/layout/detail_list_layout.xml -->

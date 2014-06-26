@@ -1,0 +1,41 @@
+K 25
+svn:wc:ra_dav:version-url
+V 99
+/svn/!svn/ver/6/trunk/jusoft/trunk/activeAndroid_orm/src/main/java/net/tsz/afinal/annotation/sqlite
+END
+OneToMany.java
+K 25
+svn:wc:ra_dav:version-url
+V 114
+/svn/!svn/ver/6/trunk/jusoft/trunk/activeAndroid_orm/src/main/java/net/tsz/afinal/annotation/sqlite/OneToMany.java
+END
+Table.java
+K 25
+svn:wc:ra_dav:version-url
+V 110
+/svn/!svn/ver/6/trunk/jusoft/trunk/activeAndroid_orm/src/main/java/net/tsz/afinal/annotation/sqlite/Table.java
+END
+ManyToOne.java
+K 25
+svn:wc:ra_dav:version-url
+V 114
+/svn/!svn/ver/6/trunk/jusoft/trunk/activeAndroid_orm/src/main/java/net/tsz/afinal/annotation/sqlite/ManyToOne.java
+END
+Id.java
+K 25
+svn:wc:ra_dav:version-url
+V 107
+/svn/!svn/ver/6/trunk/jusoft/trunk/activeAndroid_orm/src/main/java/net/tsz/afinal/annotation/sqlite/Id.java
+END
+Transient.java
+K 25
+svn:wc:ra_dav:version-url
+V 114
+/svn/!svn/ver/6/trunk/jusoft/trunk/activeAndroid_orm/src/main/java/net/tsz/afinal/annotation/sqlite/Transient.java
+END
+Property.java
+K 25
+svn:wc:ra_dav:version-url
+V 113
+/svn/!svn/ver/6/trunk/jusoft/trunk/activeAndroid_orm/src/main/java/net/tsz/afinal/annotation/sqlite/Property.java
+END

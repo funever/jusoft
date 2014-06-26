@@ -1,0 +1,53 @@
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svn/!svn/ver/6/trunk/jusoft/trunk/activeAndroid_orm/src/main/java/net/tsz/afinal/bitmap/core
+END
+BitmapProcess.java
+K 25
+svn:wc:ra_dav:version-url
+V 112
+/svn/!svn/ver/6/trunk/jusoft/trunk/activeAndroid_orm/src/main/java/net/tsz/afinal/bitmap/core/BitmapProcess.java
+END
+FileNameGenerator.java
+K 25
+svn:wc:ra_dav:version-url
+V 116
+/svn/!svn/ver/6/trunk/jusoft/trunk/activeAndroid_orm/src/main/java/net/tsz/afinal/bitmap/core/FileNameGenerator.java
+END
+BitmapCommonUtils.java
+K 25
+svn:wc:ra_dav:version-url
+V 116
+/svn/!svn/ver/6/trunk/jusoft/trunk/activeAndroid_orm/src/main/java/net/tsz/afinal/bitmap/core/BitmapCommonUtils.java
+END
+LruDiskCache.java
+K 25
+svn:wc:ra_dav:version-url
+V 111
+/svn/!svn/ver/6/trunk/jusoft/trunk/activeAndroid_orm/src/main/java/net/tsz/afinal/bitmap/core/LruDiskCache.java
+END
+BitmapDecoder.java
+K 25
+svn:wc:ra_dav:version-url
+V 112
+/svn/!svn/ver/6/trunk/jusoft/trunk/activeAndroid_orm/src/main/java/net/tsz/afinal/bitmap/core/BitmapDecoder.java
+END
+BitmapDisplayConfig.java
+K 25
+svn:wc:ra_dav:version-url
+V 118
+/svn/!svn/ver/6/trunk/jusoft/trunk/activeAndroid_orm/src/main/java/net/tsz/afinal/bitmap/core/BitmapDisplayConfig.java
+END
+BitmapCache.java
+K 25
+svn:wc:ra_dav:version-url
+V 110
+/svn/!svn/ver/6/trunk/jusoft/trunk/activeAndroid_orm/src/main/java/net/tsz/afinal/bitmap/core/BitmapCache.java
+END
+LruMemoryCache.java
+K 25
+svn:wc:ra_dav:version-url
+V 113
+/svn/!svn/ver/6/trunk/jusoft/trunk/activeAndroid_orm/src/main/java/net/tsz/afinal/bitmap/core/LruMemoryCache.java
+END

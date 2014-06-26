@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="48dp"
+    android:orientation="horizontal" 
+    android:gravity="center_vertical"
+    android:id="@+id/baobiao_monthsale_title"
+    >
+    <TextView 
+        android:id="@+id/date"
+        android:layout_width="0px"
+        android:layout_height="48dp"
+        android:layout_weight="1"
+        android:text="月份"
+        android:textColor="@android:color/black"
+        android:textSize="16dp"
+        android:gravity="center"
+        android:background="@color/select_pro_c1"
+        />
+	<TextView 
+        android:id="@+id/num"
+        android:layout_width="0px"
+        android:layout_height="48dp"
+        android:layout_weight="1"
+        android:text="销售数量"
+        android:textColor="@android:color/black"
+        android:textSize="16dp"
+        android:gravity="center"
+        android:background="@color/select_pro_c2"
+        />
+</LinearLayout>
+<!-- From: file:/E:/android_studio_workspace/jusoft/justSoft_gjp/src/main/res/layout/baobiao_monthsale_title.xml -->

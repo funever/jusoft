@@ -1,0 +1,23 @@
+K 25
+svn:wc:ra_dav:version-url
+V 55
+/svn/!svn/ver/6/trunk/jusoft/trunk/pullToRefreshlibrary
+END
+build.gradle
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn/!svn/ver/14/trunk/jusoft/trunk/pullToRefreshlibrary/build.gradle
+END
+pullToRefreshlibrary.iml
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/svn/!svn/ver/14/trunk/jusoft/trunk/pullToRefreshlibrary/pullToRefreshlibrary.iml
+END
+lint.xml
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/svn/!svn/ver/6/trunk/jusoft/trunk/pullToRefreshlibrary/lint.xml
+END

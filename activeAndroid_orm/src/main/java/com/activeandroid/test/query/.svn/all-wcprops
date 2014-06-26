@@ -1,0 +1,35 @@
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/svn/!svn/ver/6/trunk/jusoft/trunk/activeAndroid_orm/src/main/java/com/activeandroid/test/query
+END
+SelectTest.java
+K 25
+svn:wc:ra_dav:version-url
+V 111
+/svn/!svn/ver/6/trunk/jusoft/trunk/activeAndroid_orm/src/main/java/com/activeandroid/test/query/SelectTest.java
+END
+DeleteTest.java
+K 25
+svn:wc:ra_dav:version-url
+V 111
+/svn/!svn/ver/6/trunk/jusoft/trunk/activeAndroid_orm/src/main/java/com/activeandroid/test/query/DeleteTest.java
+END
+FromTest.java
+K 25
+svn:wc:ra_dav:version-url
+V 109
+/svn/!svn/ver/6/trunk/jusoft/trunk/activeAndroid_orm/src/main/java/com/activeandroid/test/query/FromTest.java
+END
+UpdateTest.java
+K 25
+svn:wc:ra_dav:version-url
+V 111
+/svn/!svn/ver/6/trunk/jusoft/trunk/activeAndroid_orm/src/main/java/com/activeandroid/test/query/UpdateTest.java
+END
+SqlableTestCase.java
+K 25
+svn:wc:ra_dav:version-url
+V 116
+/svn/!svn/ver/6/trunk/jusoft/trunk/activeAndroid_orm/src/main/java/com/activeandroid/test/query/SqlableTestCase.java
+END

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical"
+    android:id="@+id/operate_in"
+    >
+    <ViewFlipper
+        android:id="@+id/vf"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        >
+        <include layout="@layout/tiao_order_in_layout"/>
+        <include layout="@layout/tiao_order_list"/>
+        <include layout="@layout/tiao_product_list"/>
+    </ViewFlipper>
+</LinearLayout>

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- pressed -->
+    <item>
+        <shape>
+        <gradient
+	        android:startColor="#990000"
+	        android:endColor="#ff2236"
+	        android:angle="90"
+	        />
+        <corners
+            android:topLeftRadius="5dp"
+            android:topRightRadius="5dp"
+            />
+        </shape>
+    </item>
+</selector><!-- From: file:/E:/android_studio_workspace/jusoft/justSoft_gjp/src/main/res/drawable/dialog_title_style.xml -->

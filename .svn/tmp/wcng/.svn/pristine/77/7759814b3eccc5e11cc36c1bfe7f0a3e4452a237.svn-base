@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" 
+    >
+    <com.handmark.pulltorefresh.library.PullToRefreshListView 
+        android:id="@+id/orderlist"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginBottom="15dp"
+        android:background="@drawable/all_round"
+        android:divider="@drawable/list_devide"
+        android:dividerHeight="1px" 
+        android:cacheColorHint="#00000000"
+        >
+    </com.handmark.pulltorefresh.library.PullToRefreshListView >
+</LinearLayout>

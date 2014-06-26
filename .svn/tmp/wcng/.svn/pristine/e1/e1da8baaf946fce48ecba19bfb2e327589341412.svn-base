@@ -1,0 +1,69 @@
+package com.jetsoft;
+
+import net.tsz.afinal.FinalActivity;
+import net.tsz.afinal.annotation.view.ViewInject;
+import android.app.Activity;
+import android.content.SharedPreferences;
+import android.content.SharedPreferences.Editor;
+import android.os.Bundle;
+import android.view.View;
+import android.view.Window;
+import android.widget.Button;
+import android.widget.EditText;
+
+public class CompanyInfoActivity extends FinalActivity{
+
+    @ViewInject(id=R.id.nv_return,click="click")
+    private Button nv_return;
+    @ViewInject(id=R.id.edit,click="click")
+    private Button edit;
+    @ViewInject(id=R.id.cp_name)
+    private EditText cp_name;
+    @ViewInject(id=R.id.cp_tel)
+    private EditText cp_tel;
+    @ViewInject(id=R.id.cp_address)
+    private EditText cp_address;
+
+    SharedPreferences preferences;
+    Editor editor;
+
+    public static final String COM_CONFIG = "company_info";
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
+        setContentView(R.layout.company_info);
+
+        preferences = getSharedPreferences(CompanyInfoActivity.COM_CONFIG,Activity.MODE_PRIVATE);
+        editor = preferences.edit();
+
+        cp_name.setText(preferences.getString("cp_name", ""));
+        cp_tel.setText(preferences.getString("cp_tel", ""));
+        cp_address.setText(preferences.getString("cp_address", ""));
+    }
+
+    public void click(View v){
+        if(v == edit){
+            if(edit.getText().equals("编辑")){
+                edit.setText("保存");
+                cp_name.setEnabled(true);
+                cp_tel.setEnabled(true);
+                cp_address.setEnabled(true);
+
+                cp_name.requestFocus();
+            }else if(edit.getText().equals("保存")){
+                edit.setText("编辑");
+                editor.putString("cp_name", cp_name.getText().toString());
+                editor.putString("cp_tel", cp_tel.getText().toString());
+                editor.putString("cp_address", cp_address.getText().toString());
+                editor.commit();
+                cp_name.setEnabled(false);
+                cp_tel.setEnabled(false);
+                cp_address.setEnabled(false);
+
+            }
+        }else if(v == nv_return){
+            this.finish();
+        }
+    }
+}

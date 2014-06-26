@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="45dp"
+    android:gravity="center_vertical"
+    android:minWidth="@dimen/pro_list_width"
+    >
+    <ImageView 
+        android:src="@drawable/add_pro"
+        android:layout_height="40dp"
+        android:layout_width="40dp"
+        android:paddingLeft="10dp"
+        android:layout_centerVertical="true"
+        android:id="@+id/pro_add"
+        />
+    <EditText 
+        android:layout_width="240dp"
+        android:layout_height="38dp"
+        android:layout_marginLeft="50dp"
+        android:textSize="20dp"
+        android:layout_centerVertical="true"
+        android:hint="输入商品"
+        android:singleLine="true"
+        android:background="@drawable/edit_style"
+        android:id="@+id/pro_search_text"
+        />
+    <ImageView 
+   	    android:layout_width="30dip"
+      	android:layout_height="30dip"
+       	android:layout_marginRight="7dp"
+       	android:layout_centerVertical="true"
+       	android:src="@drawable/search"
+       	android:id="@+id/pro_search"
+       	android:layout_toRightOf="@id/pro_search_text"
+   	    />
+</RelativeLayout>

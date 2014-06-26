@@ -1,0 +1,29 @@
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/svn/!svn/ver/6/trunk/jusoft/trunk/activeAndroid_orm/src/main/java/com/activeandroid/serializer
+END
+CalendarSerializer.java
+K 25
+svn:wc:ra_dav:version-url
+V 119
+/svn/!svn/ver/6/trunk/jusoft/trunk/activeAndroid_orm/src/main/java/com/activeandroid/serializer/CalendarSerializer.java
+END
+SqlDateSerializer.java
+K 25
+svn:wc:ra_dav:version-url
+V 118
+/svn/!svn/ver/6/trunk/jusoft/trunk/activeAndroid_orm/src/main/java/com/activeandroid/serializer/SqlDateSerializer.java
+END
+TypeSerializer.java
+K 25
+svn:wc:ra_dav:version-url
+V 115
+/svn/!svn/ver/6/trunk/jusoft/trunk/activeAndroid_orm/src/main/java/com/activeandroid/serializer/TypeSerializer.java
+END
+UtilDateSerializer.java
+K 25
+svn:wc:ra_dav:version-url
+V 119
+/svn/!svn/ver/6/trunk/jusoft/trunk/activeAndroid_orm/src/main/java/com/activeandroid/serializer/UtilDateSerializer.java
+END

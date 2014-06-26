@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	>
+	<gradient
+		android:startColor="#FFDDDDDD"
+		android:endColor="#FFDDDDDD"
+		android:angle="0.0"
+		android:centerColor="#FFDDDDDD"
+		>
+	</gradient>
+	<stroke
+		android:width="0.5dip"
+		android:color="#FFBBBBBB"
+		>
+	</stroke>
+	<corners
+		android:topLeftRadius="0.0dip"
+		android:topRightRadius="0.0dip"
+		android:bottomLeftRadius="0.0dip"
+		android:bottomRightRadius="0.0dip"
+		>
+	</corners>
+</shape>
+<!-- From: file:/E:/android_studio_workspace/jusoft/justSoft_gjp/src/main/res/drawable/darkbackground_rounded_rectangle_unupdown.xml -->

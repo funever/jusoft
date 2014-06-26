@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?> 
+
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item>
+        <shape> 
+  <!--   <gradient android:startColor="#B5E7B8" 
+        android:endColor="#76D37B" 
+        android:angle="270"/>  -->
+    <solid android:color="#dd0000"/>
+    <corners 
+        android:topLeftRadius="0dp"
+        android:topRightRadius="0dp"
+        android:bottomLeftRadius="0dp"
+        android:bottomRightRadius="0dp"
+        />
+	</shape> 
+</item>
+</selector><!-- From: file:/E:/android_studio_workspace/jusoft/justSoft_gjp/src/main/res/drawable/app_list_corner_round_top.xml -->

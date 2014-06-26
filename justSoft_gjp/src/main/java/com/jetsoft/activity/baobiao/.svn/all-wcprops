@@ -1,0 +1,143 @@
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svn/!svn/ver/6/trunk/jusoft/trunk/justSoft_gjp/src/main/java/com/jetsoft/activity/baobiao
+END
+OrderCheckViewHolder.java
+K 25
+svn:wc:ra_dav:version-url
+V 116
+/svn/!svn/ver/6/trunk/jusoft/trunk/justSoft_gjp/src/main/java/com/jetsoft/activity/baobiao/OrderCheckViewHolder.java
+END
+MonthSaleDetailViewHolder.java
+K 25
+svn:wc:ra_dav:version-url
+V 121
+/svn/!svn/ver/6/trunk/jusoft/trunk/justSoft_gjp/src/main/java/com/jetsoft/activity/baobiao/MonthSaleDetailViewHolder.java
+END
+OrderCheckActivity.java
+K 25
+svn:wc:ra_dav:version-url
+V 115
+/svn/!svn/ver/15/trunk/jusoft/trunk/justSoft_gjp/src/main/java/com/jetsoft/activity/baobiao/OrderCheckActivity.java
+END
+BaoBiaoItemActivity.java
+K 25
+svn:wc:ra_dav:version-url
+V 116
+/svn/!svn/ver/15/trunk/jusoft/trunk/justSoft_gjp/src/main/java/com/jetsoft/activity/baobiao/BaoBiaoItemActivity.java
+END
+ProfitDetailViewHolder.java
+K 25
+svn:wc:ra_dav:version-url
+V 118
+/svn/!svn/ver/6/trunk/jusoft/trunk/justSoft_gjp/src/main/java/com/jetsoft/activity/baobiao/ProfitDetailViewHolder.java
+END
+WLViewHolder.java
+K 25
+svn:wc:ra_dav:version-url
+V 108
+/svn/!svn/ver/6/trunk/jusoft/trunk/justSoft_gjp/src/main/java/com/jetsoft/activity/baobiao/WLViewHolder.java
+END
+BaobiaoDetailActivity.java
+K 25
+svn:wc:ra_dav:version-url
+V 118
+/svn/!svn/ver/15/trunk/jusoft/trunk/justSoft_gjp/src/main/java/com/jetsoft/activity/baobiao/BaobiaoDetailActivity.java
+END
+BaoBiaoInfoActivity.java
+K 25
+svn:wc:ra_dav:version-url
+V 116
+/svn/!svn/ver/15/trunk/jusoft/trunk/justSoft_gjp/src/main/java/com/jetsoft/activity/baobiao/BaoBiaoInfoActivity.java
+END
+DetailViewHolder.java
+K 25
+svn:wc:ra_dav:version-url
+V 112
+/svn/!svn/ver/6/trunk/jusoft/trunk/justSoft_gjp/src/main/java/com/jetsoft/activity/baobiao/DetailViewHolder.java
+END
+JHHZViewHolder.java
+K 25
+svn:wc:ra_dav:version-url
+V 110
+/svn/!svn/ver/6/trunk/jusoft/trunk/justSoft_gjp/src/main/java/com/jetsoft/activity/baobiao/JHHZViewHolder.java
+END
+SubmitOrderCheckActivity.java
+K 25
+svn:wc:ra_dav:version-url
+V 121
+/svn/!svn/ver/15/trunk/jusoft/trunk/justSoft_gjp/src/main/java/com/jetsoft/activity/baobiao/SubmitOrderCheckActivity.java
+END
+XSHZViewHolder.java
+K 25
+svn:wc:ra_dav:version-url
+V 110
+/svn/!svn/ver/6/trunk/jusoft/trunk/justSoft_gjp/src/main/java/com/jetsoft/activity/baobiao/XSHZViewHolder.java
+END
+KCZKViewHolder.java
+K 25
+svn:wc:ra_dav:version-url
+V 110
+/svn/!svn/ver/6/trunk/jusoft/trunk/justSoft_gjp/src/main/java/com/jetsoft/activity/baobiao/KCZKViewHolder.java
+END
+ViewHolderFactory.java
+K 25
+svn:wc:ra_dav:version-url
+V 113
+/svn/!svn/ver/6/trunk/jusoft/trunk/justSoft_gjp/src/main/java/com/jetsoft/activity/baobiao/ViewHolderFactory.java
+END
+JYLCViewHolder.java
+K 25
+svn:wc:ra_dav:version-url
+V 110
+/svn/!svn/ver/6/trunk/jusoft/trunk/justSoft_gjp/src/main/java/com/jetsoft/activity/baobiao/JYLCViewHolder.java
+END
+WLDetailViewHolder.java
+K 25
+svn:wc:ra_dav:version-url
+V 114
+/svn/!svn/ver/6/trunk/jusoft/trunk/justSoft_gjp/src/main/java/com/jetsoft/activity/baobiao/WLDetailViewHolder.java
+END
+BaoBiaoActivity.java
+K 25
+svn:wc:ra_dav:version-url
+V 112
+/svn/!svn/ver/15/trunk/jusoft/trunk/justSoft_gjp/src/main/java/com/jetsoft/activity/baobiao/BaoBiaoActivity.java
+END
+DetailAdapte.java
+K 25
+svn:wc:ra_dav:version-url
+V 108
+/svn/!svn/ver/6/trunk/jusoft/trunk/justSoft_gjp/src/main/java/com/jetsoft/activity/baobiao/DetailAdapte.java
+END
+XJDetailViewHolder.java
+K 25
+svn:wc:ra_dav:version-url
+V 114
+/svn/!svn/ver/6/trunk/jusoft/trunk/justSoft_gjp/src/main/java/com/jetsoft/activity/baobiao/XJDetailViewHolder.java
+END
+DefaultViewHolder.java
+K 25
+svn:wc:ra_dav:version-url
+V 113
+/svn/!svn/ver/6/trunk/jusoft/trunk/justSoft_gjp/src/main/java/com/jetsoft/activity/baobiao/DefaultViewHolder.java
+END
+XJYHViewHolder.java
+K 25
+svn:wc:ra_dav:version-url
+V 110
+/svn/!svn/ver/6/trunk/jusoft/trunk/justSoft_gjp/src/main/java/com/jetsoft/activity/baobiao/XJYHViewHolder.java
+END
+BaoBiaoResultActivity.java
+K 25
+svn:wc:ra_dav:version-url
+V 118
+/svn/!svn/ver/15/trunk/jusoft/trunk/justSoft_gjp/src/main/java/com/jetsoft/activity/baobiao/BaoBiaoResultActivity.java
+END
+ViewHolder.java
+K 25
+svn:wc:ra_dav:version-url
+V 106
+/svn/!svn/ver/6/trunk/jusoft/trunk/justSoft_gjp/src/main/java/com/jetsoft/activity/baobiao/ViewHolder.java
+END

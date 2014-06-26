@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/operate_in"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@drawable/main_bg"
+    android:orientation="vertical" >
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="50dp"
+        android:background="@drawable/titlebar_background" >
+
+        <TextView
+            android:id="@+id/navi_title"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:gravity="center"
+            android:text="库存盘点"
+            android:textColor="#ffffff"
+            android:textSize="16dp" />
+
+        <Button
+            android:id="@+id/nv_return"
+            android:layout_width="55dp"
+            android:layout_height="38dp"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:background="@drawable/titlebar_back_btn_background"
+            android:paddingLeft="7dp"
+            android:text="返回"
+            android:textColor="#ffffff" />
+    </RelativeLayout>
+
+    <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:layout_marginTop="30dp"
+                android:background="@drawable/all_round"
+                android:orientation="vertical" >
+                <RelativeLayout
+                    android:id="@+id/ck_action"
+                    android:layout_width="fill_parent"
+                    android:layout_height="45dp"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:paddingLeft="10dp" >
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="fill_parent"
+                        android:gravity="center_vertical"
+                        android:text="仓库:"
+                        android:textColor="#000000"
+                        android:textSize="16dp" />
+                    <EditText
+                        android:id="@+id/ck_edit"
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="100dp"
+                        android:layout_marginRight="40dp"
+                        android:background="@drawable/edit_style"
+                        android:textColor="#0000ff"
+                        android:textSize="17dp" />
+                  <ImageView
+                        android:id="@+id/ck_add"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="7dp"
+                        android:src="@drawable/search" /> 
+                </RelativeLayout>
+
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="1px"
+                    android:background="#cccccc" />
+
+                <RelativeLayout
+                    android:id="@+id/pandian_date"
+                    android:layout_width="fill_parent"
+                    android:layout_height="45dp"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="10dp" >
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="fill_parent"
+                        android:gravity="center_vertical"
+                        android:text="盘点时间:"
+                        android:textColor="#000000"
+                        android:textSize="16dp" />
+
+                    <TextView
+                        android:id="@+id/pandian_date_text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="fill_parent"
+                        android:layout_marginLeft="100dp"
+                        android:gravity="center_vertical"
+                        android:textColor="#0000ff"
+                        android:textSize="17dp" />
+
+                    <ImageView
+                        android:layout_width="6dip"
+                        android:layout_height="12dip"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="15dip"
+                        android:src="@drawable/home_index_arrow" />
+                </RelativeLayout>
+            </LinearLayout>
+            <Button 
+		        android:layout_width="fill_parent"
+		        android:layout_height="45dp"
+		        android:layout_marginTop="30dp"
+		        android:layout_marginLeft="15dp"
+		        android:layout_marginRight="15dp"
+		        android:orientation="vertical"
+		        android:background="@drawable/all_round"
+		        android:text="盘    点"
+		        android:textSize="17dp"
+		        android:id="@+id/submit"
+		        />
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

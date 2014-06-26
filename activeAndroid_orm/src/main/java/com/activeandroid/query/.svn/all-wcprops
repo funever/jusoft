@@ -1,0 +1,47 @@
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svn/!svn/ver/6/trunk/jusoft/trunk/activeAndroid_orm/src/main/java/com/activeandroid/query
+END
+Select.java
+K 25
+svn:wc:ra_dav:version-url
+V 102
+/svn/!svn/ver/6/trunk/jusoft/trunk/activeAndroid_orm/src/main/java/com/activeandroid/query/Select.java
+END
+Delete.java
+K 25
+svn:wc:ra_dav:version-url
+V 102
+/svn/!svn/ver/6/trunk/jusoft/trunk/activeAndroid_orm/src/main/java/com/activeandroid/query/Delete.java
+END
+From.java
+K 25
+svn:wc:ra_dav:version-url
+V 100
+/svn/!svn/ver/6/trunk/jusoft/trunk/activeAndroid_orm/src/main/java/com/activeandroid/query/From.java
+END
+Join.java
+K 25
+svn:wc:ra_dav:version-url
+V 100
+/svn/!svn/ver/6/trunk/jusoft/trunk/activeAndroid_orm/src/main/java/com/activeandroid/query/Join.java
+END
+Update.java
+K 25
+svn:wc:ra_dav:version-url
+V 102
+/svn/!svn/ver/6/trunk/jusoft/trunk/activeAndroid_orm/src/main/java/com/activeandroid/query/Update.java
+END
+Sqlable.java
+K 25
+svn:wc:ra_dav:version-url
+V 103
+/svn/!svn/ver/6/trunk/jusoft/trunk/activeAndroid_orm/src/main/java/com/activeandroid/query/Sqlable.java
+END
+Set.java
+K 25
+svn:wc:ra_dav:version-url
+V 99
+/svn/!svn/ver/6/trunk/jusoft/trunk/activeAndroid_orm/src/main/java/com/activeandroid/query/Set.java
+END

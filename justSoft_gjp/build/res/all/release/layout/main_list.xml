@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/main_bg"
+    android:orientation="vertical" >
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="50dp"
+        android:background="@drawable/titlebar_background" >
+        <TextView
+            android:id="@+id/navi_title"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:gravity="center"
+            android:text="捷软进销存"
+            android:textColor="#ffffff"
+            android:textSize="16dp" />
+        <Button 
+            android:layout_width="55dp"
+            android:layout_height="38dp"
+            android:id="@+id/nv_return"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:text="返回"
+            android:textColor="#ffffff"
+            android:paddingLeft="7dp"
+            android:background="@drawable/titlebar_back_btn_background"
+            />
+    </RelativeLayout>
+    <ViewFlipper
+        android:id="@+id/vf"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:layout_marginTop="30dp" >
+        <include layout="@layout/menu_main" />
+        <include layout="@layout/menu_order_menu" />
+        <include layout="@layout/menu_sale_menu" />
+        <include layout="@layout/menu_kucun_menu" />
+        <include layout="@layout/menu_money_menu" />
+        <include layout="@layout/menu_pandian_menu" />
+    </ViewFlipper>
+    <RelativeLayout 
+        android:layout_width="fill_parent"
+        android:layout_height="match_parent"
+        >
+        <TextView 
+        android:text="test1"
+        android:textColor="#000000"
+        android:textSize="17dp"
+        android:layout_width="fill_parent"
+        android:layout_height="30dp"
+        android:paddingLeft="10dp"
+        android:id="@+id/zt_name"
+        android:layout_alignParentBottom="true"
+        android:gravity="center"
+        />
+    </RelativeLayout>
+</LinearLayout><!-- From: file:/E:/android_studio_workspace/jusoft/justSoft_gjp/src/main/res/layout/main_list.xml -->

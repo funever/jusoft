@@ -1,0 +1,41 @@
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svn/!svn/ver/6/trunk/jusoft/trunk/activeAndroid_orm/src/main/java/com/activeandroid
+END
+TableInfo.java
+K 25
+svn:wc:ra_dav:version-url
+V 99
+/svn/!svn/ver/6/trunk/jusoft/trunk/activeAndroid_orm/src/main/java/com/activeandroid/TableInfo.java
+END
+ActiveAndroid.java
+K 25
+svn:wc:ra_dav:version-url
+V 103
+/svn/!svn/ver/6/trunk/jusoft/trunk/activeAndroid_orm/src/main/java/com/activeandroid/ActiveAndroid.java
+END
+DatabaseHelper.java
+K 25
+svn:wc:ra_dav:version-url
+V 104
+/svn/!svn/ver/6/trunk/jusoft/trunk/activeAndroid_orm/src/main/java/com/activeandroid/DatabaseHelper.java
+END
+Model.java
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/svn/!svn/ver/6/trunk/jusoft/trunk/activeAndroid_orm/src/main/java/com/activeandroid/Model.java
+END
+ModelInfo.java
+K 25
+svn:wc:ra_dav:version-url
+V 99
+/svn/!svn/ver/6/trunk/jusoft/trunk/activeAndroid_orm/src/main/java/com/activeandroid/ModelInfo.java
+END
+Cache.java
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/svn/!svn/ver/6/trunk/jusoft/trunk/activeAndroid_orm/src/main/java/com/activeandroid/Cache.java
+END

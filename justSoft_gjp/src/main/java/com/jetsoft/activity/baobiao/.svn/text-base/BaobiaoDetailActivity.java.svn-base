@@ -1,0 +1,155 @@
+package com.jetsoft.activity.baobiao;
+
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.LinkedList;
+import java.util.List;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import com.actionbarsherlock.view.MenuItem;
+import com.handmark.pulltorefresh.library.PullToRefreshBase.Mode;
+import com.handmark.pulltorefresh.library.PullToRefreshBase.OnRefreshListener;
+import com.handmark.pulltorefresh.library.PullToRefreshBase;
+import com.handmark.pulltorefresh.library.PullToRefreshListView;
+import com.jetsoft.R;
+import com.jetsoft.activity.SourceActivity;
+import com.jetsoft.io.CommunicationServer;
+import com.jetsoft.io.ExcuteThread;
+import com.jetsoft.utils.Utils;
+import android.os.AsyncTask;
+import android.os.Bundle;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.view.Window;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
+import android.widget.Button;
+import android.widget.ListView;
+import android.widget.TextView;
+import android.widget.Toast;
+
+public class BaobiaoDetailActivity extends SourceActivity implements OnItemClickListener{
+
+    HashMap<String, String> paramMap ;
+
+    PullToRefreshListView refreshList;
+
+    ListView listView;
+
+    int page = 1;
+
+    String action;
+
+    int type;
+
+    DetailAdapte detailAdapte;
+
+    List<HashMap<String,String>> dataList = new LinkedList<HashMap<String,String>>();
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        setTheme(R.style.StyledIndicators);
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.detail_list_layout);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        type = getIntent().getIntExtra("type", 0);
+
+        if(type == BaoBiaoActivity.XJYH){
+            findViewById(R.id.detail_xjyh_item).setVisibility(View.VISIBLE);
+            getSupportActionBar().setTitle("现金银行明细");
+        }else{
+            findViewById(R.id.detail_wldw_item).setVisibility(View.VISIBLE);
+            getSupportActionBar().setTitle("单位应收应付明细");
+        }
+
+        refreshList = (PullToRefreshListView) findViewById(R.id.entity_list);
+        refreshList.setMode(Mode.PULL_FROM_END);
+        refreshList.setScrollingWhileRefreshingEnabled(false);
+        refreshList.getLoadingLayoutProxy().setReleaseLabel("上拉加载下一页");
+        refreshList.setOnRefreshListener(new OnRefreshListener<ListView>() {
+            @Override
+            public void onRefresh(PullToRefreshBase<ListView> refreshView) {
+                new GetDataTask().execute();
+            }
+        });
+        listView = refreshList.getRefreshableView();
+
+        paramMap = (HashMap<String, String>) getIntent().getSerializableExtra("param");
+
+        detailAdapte = new DetailAdapte(type, dataList, this);
+        listView.setAdapter(detailAdapte);
+        listView.setOnItemClickListener(this);
+
+        Utils.showProgressDialog("正在获取信息,请稍候……", this);
+        if(type == BaoBiaoActivity.XJYH){
+            action = getString(R.string.financeDetail);
+        }else if(type == BaoBiaoActivity.WLDW){
+            action = getString(R.string.utypeArapDetail);
+        }
+        paramMap.put("cpage", page+++"");
+        CommunicationServer cs = new CommunicationServer(this, application.getClient(), server+action,paramMap, handler, new GetDetail());
+        Thread t = new Thread(cs);
+        t.start();
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if(item.getItemId() == android.R.id.home){
+            this.finish();
+            return false;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    class GetDetail extends ExcuteThread{
+
+        @Override
+        public void run() {
+            Utils.dismissProgressDialog();
+            JSONArray ja;
+            try {
+                refreshList.onRefreshComplete();
+                ja = new JSONArray(getJsonString());
+                if(ja.length()==0){
+                    Toast.makeText(BaobiaoDetailActivity.this, "没有更多的数据了!", Toast.LENGTH_SHORT).show();
+                    refreshList.setMode(Mode.DISABLED);
+                    return;
+                }
+                for(int i=0;i<ja.length();i++){
+                    HashMap<String,String> map = new HashMap<String, String>();
+                    JSONObject jo = ja.getJSONObject(i);
+                    Iterator<String> keys = jo.keys();
+                    while(keys.hasNext()){
+                        String key = keys.next();
+                        map.put(key, jo.getString(key));
+                    }
+                    dataList.add(map);
+                }
+                detailAdapte.notifyDataSetChanged();
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    private class GetDataTask extends AsyncTask<Void, Void, String[]> {
+        @Override
+        protected String[] doInBackground(Void... arg0) {
+            paramMap.put("cpage", (page++)+"");
+            CommunicationServer sc = new CommunicationServer(BaobiaoDetailActivity.this,application.getClient(),server+action,paramMap,handler, new GetDetail());
+            Thread t = new Thread(sc);
+            t.start();
+            return null;
+        }
+    }
+
+    @Override
+    public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
+        HashMap<String, String> data = dataList.get(arg2-1);
+        nBilType = data.get("bilType");
+        bilID = data.get("bilID");
+        getDraftContent();
+    }
+}

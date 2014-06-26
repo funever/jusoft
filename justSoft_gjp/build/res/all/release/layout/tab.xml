@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TextView 
+   	xmlns:android="http://schemas.android.com/apk/res/android"
+   	android:id="@+id/tabname"
+    android:layout_width="fill_parent"
+    android:layout_height="45dp"
+    android:gravity="center"
+   	android:textColor="#FFFFFF"
+    android:textSize="16dip"
+    android:paddingBottom="3dip"
+    android:background="@drawable/tab_style"
+/>
+<!-- From: file:/E:/android_studio_workspace/jusoft/justSoft_gjp/src/main/res/layout/tab.xml -->

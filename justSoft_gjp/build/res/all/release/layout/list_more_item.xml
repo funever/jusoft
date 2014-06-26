@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal" 
+    android:id="@+id/more"
+    >
+    <TextView 
+        android:text="点击加载下一页..."
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical|left"
+        android:paddingLeft="50dp"
+        android:minHeight="48dp"
+        android:textSize="16dp"
+        android:textColor="@android:color/black"
+        />
+</LinearLayout>
+<!-- From: file:/E:/android_studio_workspace/jusoft/justSoft_gjp/src/main/res/layout/list_more_item.xml -->

@@ -1,0 +1,6 @@
+include ':activeAndroid_orm'
+include ':bluetoochScanner'
+include ':pullToRefreshlibrary'
+include ':switchButton'
+include ':justSoft_gjp'
+include ':viewpagerindicator'

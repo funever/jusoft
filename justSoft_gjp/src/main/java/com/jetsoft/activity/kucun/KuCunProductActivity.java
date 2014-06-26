@@ -1,0 +1,565 @@
+/**
+ * 创建日期 2013-2-20
+ * 创建用户 Administrator
+ * 变更情况:
+ * 文档位置 $Archive$
+ * 最后变更 $Author$
+ * 变更日期 $Date$
+ * 当前版本 $Revision$
+ * 
+ * Copyright (c) 2004 Sino-Japanese Engineering Corp, Inc. All Rights Reserved.
+ * 
+ */
+package com.jetsoft.activity.kucun;
+
+import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.List;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+import android.app.Activity;
+import android.content.Intent;
+import android.content.SharedPreferences;
+import android.graphics.Color;
+import android.os.Bundle;
+import android.os.Handler;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.view.View.OnClickListener;
+import android.widget.AdapterView;
+import android.widget.BaseAdapter;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.ListView;
+import android.widget.TextView;
+import android.widget.Toast;
+import android.widget.AdapterView.OnItemClickListener;
+
+import com.actionbarsherlock.view.Menu;
+import com.actionbarsherlock.view.MenuItem;
+import com.jetsoft.R;
+import com.jetsoft.activity.*;
+import com.jetsoft.application.MyApplication;
+import com.jetsoft.entity.PanDianProduct;
+import com.jetsoft.entity.ProductEntity;
+import com.jetsoft.entity.TableEntity;
+import com.jetsoft.io.CommunicationServer;
+import com.jetsoft.io.ExcuteThread;
+import com.jetsoft.utils.StaticValues;
+import com.jetsoft.utils.Utils;
+
+public class KuCunProductActivity extends BaseActivity implements OnClickListener,OnItemClickListener{
+	
+	ListView pandianList;
+	
+	Button add_button,nv_save;
+	
+	ImageView pro_add;
+	
+	EditText pr_edit;
+	/**
+	 * 仓库id
+	 */
+	String ck_id;
+	/**
+	 * 盘点时间
+	 */
+	String date;
+	/**
+	 * 本次盘点id
+	 */
+	String mid;
+	/**
+	 * 盘点的商品
+	 */
+	LinkedHashMap<String,PanDianProduct> selectMap = new LinkedHashMap<String,PanDianProduct>();
+	
+	PanDianProductAdapter ppa;
+	
+//	ProductEntity entity;
+	
+	String products = "";
+	
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+        setTheme(R.style.StyledIndicators);
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.kucun_pandian_add_product);
+		
+		ck_id = getIntent().getStringExtra("ck_id");
+		date = getIntent().getStringExtra("date");
+		mid = getIntent().getStringExtra("mid");
+		products = getIntent().getStringExtra("product");
+		if(products!=null && !"".equals(products)){
+			getProducts();
+		}
+		
+		String ck_name = getIntent().getStringExtra("ck_name");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setTitle("[" + ck_name + "]盘点");
+		
+		pandianList = (ListView) findViewById(R.id.prolist);
+		ppa = new PanDianProductAdapter();
+		pandianList.setAdapter(ppa);
+		pandianList.setOnItemClickListener(this);
+		
+		pr_edit = (EditText) findViewById(R.id.pr_edit);
+		add_button = (Button) findViewById(R.id.submit);
+		pro_add = (ImageView) findViewById(R.id.pro_add);
+		pro_add.setOnClickListener(this);
+		add_button.setOnClickListener(this);
+
+		sv.registActivity(this);
+	}
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuItem saveItem = menu.add(0,10001,0,"保存");
+        saveItem.setIcon(android.R.drawable.ic_menu_save);
+        saveItem.setShowAsAction(MenuItem.SHOW_AS_ACTION_WITH_TEXT|MenuItem.SHOW_AS_ACTION_IF_ROOM);
+
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if(item.getItemId() == 10001){
+            if(selectMap.values().size() == 0){
+                Toast.makeText(this, "请添加要盘点的商品！", Toast.LENGTH_SHORT).show();
+                return false;
+            }
+            //提交
+            //http://192.168.0.21:6002/AndroidWEB/saveCheckDetail.do?mID=16&gID=00001&block=&num=10&cNum=1&blockNo=0&price=10&costKind=0&outDate=&date=2013-02-20
+            HashMap<String, String> param = new HashMap<String, String>();
+
+            SharedPreferences preferences = getSharedPreferences(StaticValues.CONFIG, Activity.MODE_PRIVATE);
+            server = "http://"+preferences.getString(StaticValues.SERVER_FLAG, getString(R.string.server))+":"
+                    + preferences.getString(StaticValues.PORT_FLAG, getString(R.string.port));
+            String actionUrl = getString(R.string.pandian_submit_action);
+
+            param.put("mID", mid);
+            param.put("outDate", "");
+            param.put("date", date);
+            param.put("costKind", "0");
+            param.put("block", "");
+            param.put("blockNo", "0");
+            param.put("operatorID", application.getUserEntity().getId());
+
+            int index = 0;
+            for(PanDianProduct product : selectMap.values()){
+                param.put("product["+index+"].gID", product.getId());
+                param.put("product["+index+"].num", product.getNum()+"");
+                param.put("product["+index+"].cNum", product.getPanDianNum()+"");
+                param.put("product["+index+"].price", product.getPrice());
+                index++;
+            }
+            Utils.showProgressDialog("正在提交表单，请稍候……",this);
+            /**
+             * 提交
+             */
+            CommunicationServer cs = new CommunicationServer(this,application.getClient(),server+actionUrl, param, handler, new SubmitPandian());
+            Thread t = new Thread(cs);
+            t.start();
+        }else if(item.getItemId() == android.R.id.home){
+            this.finish();
+            return false;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+	public void onClick(View v) {
+		if(v == returnButton){
+			returnMenu();
+		}else if(v == pro_add){
+			add_button.performClick();
+		}else if(v == add_button){
+			search(pr_edit.getText().toString());
+		}
+	}
+	
+	boolean searching = false;
+	
+	public void search(String str){
+		searching = true;
+		String action = getString(R.string.product_action);
+		/**
+		 * 请求的url中的参数
+		 */
+		HashMap<String,String> paramMap = new HashMap<String,String>();
+		
+		paramMap.clear();
+		//cMode=Z&szParid=00000&szSid=&szOperator=00000&szStr=
+		paramMap.put("cMode", "Z");
+		paramMap.put("szParid", "00000");
+		paramMap.put("szSid", "");
+		paramMap.put("szOperator", application.getUserEntity().getId());
+		paramMap.put("szStr", str);
+		paramMap.put("nBilType", "0");
+		paramMap.put("szUid", "");
+		
+		SharedPreferences preferences = getSharedPreferences(StaticValues.CONFIG, Activity.MODE_PRIVATE);
+		//获取服务器地址
+		String server = "http://"+preferences.getString(StaticValues.SERVER_FLAG, getString(R.string.server))+":"
+				+ preferences.getString(StaticValues.PORT_FLAG, getString(R.string.port));
+		MyApplication application = (MyApplication) getApplication();
+		
+		Utils.showProgressDialog("请求数据中，请稍候", this);
+		CommunicationServer sc = new CommunicationServer(this,application.getClient(),server+action,paramMap,new Handler(), new EntityParseThread(str));
+		Thread t = new Thread(sc);
+		t.start();
+	}
+	
+	@Override
+	public void onActivityResult(int requestCode, int resultCode, Intent data) {
+		super.onActivityResult(requestCode, resultCode, data);
+		if(resultCode == RESULT_CANCELED){
+			return;
+		}
+		//删除已经选择的商品
+		if(resultCode == EntityListActivity.DELETE_PRODUCT){
+			try{
+				PanDianProduct product = (PanDianProduct) data.getSerializableExtra("product");
+				selectMap.remove(product.getId());
+				ppa.notifyDataSetChanged();
+			}catch (Exception e) {
+				e.printStackTrace();
+			}
+			return;
+		}
+		if(requestCode == EntityListActivity.PR_RE_CODE){
+			List reList = (List) data.getSerializableExtra("entity");
+			if(reList.size()==0){
+				return;
+			}
+			//选择盘点商品
+			ProductEntity entity = (ProductEntity) reList.get(0);
+			if(entity instanceof ProductEntity){
+				//Toast.makeText(this, "选择的商品是："+((ProductEntity)entity).getFullName(), Toast.LENGTH_SHORT).show();
+				if(selectMap.containsKey(((ProductEntity)entity).getId())){
+					PanDianProduct  pdp = selectMap.get(((ProductEntity)entity).getId());
+//					Toast.makeText(this, ((ProductEntity)entity).getFullName()+"已经出现在盘点商品中，不能重复添加！", Toast.LENGTH_SHORT).show();
+					int pandianNum = selectMap.get(((ProductEntity)entity).getId()).getPanDianNum();
+					pdp.setPanDianNum(pandianNum+1);
+					ppa.notifyDataSetChanged();
+					searching = false;
+					return;
+				}
+				SharedPreferences preferences = getSharedPreferences(StaticValues.CONFIG, Activity.MODE_PRIVATE);
+				server = "http://"+preferences.getString(StaticValues.SERVER_FLAG, getString(R.string.server))+":"
+					+ preferences.getString(StaticValues.PORT_FLAG, getString(R.string.port));
+				String actionUrl = getString(R.string.pandian_pro_action);
+				
+				HashMap<String, String> param = new HashMap<String, String>();
+				param.put("nMID", "0");
+				param.put("sID", ck_id);
+				param.put("gID", ((ProductEntity)entity).getId());
+				param.put("szDate", date);
+				param.put("cKind", "G");
+				
+				Utils.showProgressDialog("正在添加该商品，请稍候！", this);
+				CommunicationServer cs = new CommunicationServer(this,application.getClient(),server+actionUrl, param, handler, new SearchProduct(entity));
+				Thread t = new Thread(cs);
+				t.start();
+			}
+		}else if(requestCode == EntityListActivity.EDIT_PRODUCT){
+			//对商品盘点数量的更改返回
+			PanDianProduct product = (PanDianProduct) data.getSerializableExtra("product");
+			selectMap.put(product.getId(), product);
+			ppa.notifyDataSetChanged();
+		}
+	}
+	
+	/**
+	 * 查询商品库存信息的返回
+	 * 
+	 *
+	 * @version 1.0
+	 * @author Administrator
+	 */
+	class SearchProduct extends ExcuteThread{
+		
+		ProductEntity entity;
+		
+		public SearchProduct(ProductEntity entity){
+			this.entity = entity;
+		}
+		
+		@Override
+		public void run() {
+			JSONArray ja;
+			try {
+				ja = new JSONArray(getJsonString());
+				JSONObject jo = ja.getJSONObject(0);
+				PanDianProduct product = new PanDianProduct();
+				product.setId(entity.getId());
+				product.setAmount(jo.getString("amount"));
+				product.setArea(jo.getString("area"));
+				product.setFullName(jo.getString("fullName"));
+				product.setNum((int) Float.parseFloat(jo.getString("num")));
+				product.setPanDianNum(1);
+				product.setPersonCode(jo.getString("personCode"));
+				product.setPrice(jo.getString("price"));
+				product.setStandard(jo.getString("standard"));
+				product.setType(jo.getString("type"));
+				
+				product.setuRate0(entity.getuRate0());
+				product.setuRate1(entity.getuRate1());
+				product.setuRate2(entity.getuRate2());
+				product.setuRateBil(entity.getuRateBil());
+				
+				selectMap.put(entity.getId(), product);
+				ppa.notifyDataSetChanged();
+				searching = false;
+			}catch (Exception e) {
+				Toast.makeText(KuCunProductActivity.this, "获取商品库存信息错误！", Toast.LENGTH_SHORT).show();
+			}finally{
+				Utils.dismissProgressDialog();
+			}
+		}
+	}
+	
+	/**
+	 * 提交盘点后的返回
+	 * 
+	 *
+	 * @version 1.0
+	 * @author Administrator
+	 */
+	class SubmitPandian extends ExcuteThread{
+		@Override
+		public void run() {
+			JSONArray ja;
+			try {
+				ja = new JSONArray(getJsonString());
+				JSONObject jo = ja.getJSONObject(0);
+				String result = jo.getString("result");
+				if(result.equalsIgnoreCase("success")){
+					selectMap.clear();
+					setResult(RESULT_OK);
+					KuCunProductActivity.this.finish();
+				}else{
+					Toast.makeText(KuCunProductActivity.this, "添加失败!", Toast.LENGTH_SHORT).show();
+				}
+			}catch (Exception e) {
+				Toast.makeText(KuCunProductActivity.this, "提交盘点，服务器返回数据错误！", Toast.LENGTH_SHORT).show();
+			}finally{
+				Utils.dismissProgressDialog();
+			}
+		}
+	}
+	
+	/**
+	 * 验证是否只有一个搜索内容
+	 * @version 1.0
+	 * @author Administrator
+	 */
+	public class EntityParseThread extends ExcuteThread {
+		
+		String searchValue;
+		
+		public EntityParseThread(EditText searchET){
+			this.searchValue = searchET.getText().toString();
+		}
+		
+		public EntityParseThread(String searchValue){
+			this.searchValue = searchValue;
+		}
+		
+		public void run() {
+			try {
+				JSONArray ja = new JSONArray(getJsonString());
+				//如果搜索的结果只有一个
+				if(ja.length()==1){
+					JSONObject jo = ja.getJSONObject(0);
+					String sonNum = jo.getString("sonNum");
+					//并且没有子项，则直接添加
+					if(sonNum.equalsIgnoreCase("0")){
+						ProductEntity pe = new ProductEntity();
+						Utils.setObjectValue(pe, jo);
+						/**
+						 * 如果添加的商品已经存在，则数目上加1
+						 */
+						if(selectMap.containsKey(pe.getId())){
+							selectMap.get(pe.getId()).setPanDianNum(selectMap.get(pe.getId()).getPanDianNum()+1);
+							ppa.notifyDataSetChanged();
+							searching = false;
+							return;
+						}
+						SharedPreferences preferences = getSharedPreferences(StaticValues.CONFIG, Activity.MODE_PRIVATE);
+						server = "http://"+preferences.getString(StaticValues.SERVER_FLAG, getString(R.string.server))+":"
+							+ preferences.getString(StaticValues.PORT_FLAG, getString(R.string.port));
+						String actionUrl = getString(R.string.pandian_pro_action);
+						
+						HashMap<String, String> param = new HashMap<String, String>();
+						param.put("nMID", "0");
+						param.put("sID", ck_id);
+						param.put("gID", pe.getId());
+						param.put("szDate", date);
+						param.put("cKind", "G");
+						
+						Utils.setProgressDialogMsg("正在添加该商品，请稍候！");
+						Toast.makeText(KuCunProductActivity.this, "正在添加该商品，请稍候！", Toast.LENGTH_SHORT).show();
+						CommunicationServer cs = new CommunicationServer(KuCunProductActivity.this,application.getClient(),server+actionUrl, param, handler, new SearchProduct(pe));
+						Thread t = new Thread(cs);
+						t.start();
+						return;
+					}else{
+						searchIntent(searchValue);
+					}
+				}else{
+					searchIntent(searchValue);
+				}
+			} catch (JSONException e) {
+				Toast.makeText(KuCunProductActivity.this, "服务器数据异常!", Toast.LENGTH_SHORT).show();
+			}finally{
+				Utils.dismissProgressDialog();
+			}
+		}
+	}
+	
+	/**
+	 * 前往搜索
+	 */
+	public void searchIntent(String search){
+		Intent intent = new Intent();
+		intent.setClass(this, EntityListActivity.class);
+		intent.putExtra("type", EntityListActivity.PR_RE_CODE);
+		intent.putExtra("search", search);
+		intent.putExtra("pandian", true);
+		intent.putExtra("nBilType", "0");
+		intent.putExtra("szUid", "");
+		startActivityForResult(intent, EntityListActivity.PR_RE_CODE);
+	}
+	
+	/**
+	 * 盘点商品列表的适配器
+	 * 
+	 *
+	 * @version 1.0
+	 * @author Administrator
+	 */
+	class PanDianProductAdapter extends BaseAdapter{
+		
+		@Override
+		public int getCount() {
+			return selectMap.size();
+		}
+
+		@Override
+		public Object getItem(int position) {
+			return selectMap.values().toArray()[position];
+		}
+
+		@Override
+		public long getItemId(int position) {
+			return position;
+		}
+
+		@Override
+		public View getView(int position, View convertView, ViewGroup parent) {
+			View view = LayoutInflater.from(KuCunProductActivity.this).inflate(R.layout.pandian_pro_list_row, null);
+			TextView pro_name = (TextView) view.findViewById(R.id.pro_name);
+			TextView pro_no = (TextView) view.findViewById(R.id.pro_no);
+			TextView pandian_num = (TextView) view.findViewById(R.id.pandian_num);
+			PanDianProduct pdp = (PanDianProduct) selectMap.values().toArray()[position];
+			pro_name.setText(pdp.getFullName());
+			pro_no.setText(pdp.getPersonCode());
+			pandian_num.setText(pdp.getPanDianNum()+"");
+			pro_name.setTextColor(Color.BLUE);
+			pro_no.setTextColor(Color.BLUE);
+			pandian_num.setTextColor(Color.BLUE);
+			return view;
+		}
+		
+	}
+
+
+	@Override
+	public void updateProNum() {
+		
+	}
+
+	@Override
+	public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
+			Intent intent = new Intent();
+			intent.setClass(this, KuCunProductEditActivity.class);
+			PanDianProduct product = (PanDianProduct) selectMap.values().toArray()[arg2];
+			intent.putExtra("product", product);
+//			intent.putExtra("entity", entity);
+			startActivityForResult(intent, EntityListActivity.EDIT_PRODUCT);
+	}
+
+	@Override
+	public boolean validate() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+	
+	@Override
+	public void setScanValue(String value) {
+		if(searching){
+			return;
+		}
+		search(value);
+	}
+
+	@Override
+	public void onFocusChange(View v, boolean hasFocus) {
+		
+	}
+	
+	@Override
+	public boolean canScan() {
+		return true;
+	}
+
+	@Override
+	public void disposeLastNextData(TableEntity te) {
+		
+	}
+	
+	@Override
+	public String getNumber() {
+		return "";
+	}
+	
+	@Override
+	public synchronized void onResume() {
+		super.onResume();
+		searching = false;
+	}
+	
+	public void getProducts(){
+		JSONArray ja;
+		try {
+			ja = new JSONArray(products);
+			for(int i=0;i<ja.length();i++){
+				JSONObject jo = ja.getJSONObject(i);
+				PanDianProduct pdp = new PanDianProduct();
+				pdp.setNum(jo.getInt("num"));
+//				pdp.setPrice(jo.getString(""))
+				pdp.setAmount(jo.getString("amount"));
+				pdp.setId(jo.getString("gID"));
+				pdp.setPanDianNum(jo.getInt("cNum"));
+				pdp.setPrice(jo.getString("amount"));
+				pdp.setFullName(jo.getString("gName"));
+				pdp.setPersonCode(jo.getString("gPersonCode"));
+				pdp.setStandard(jo.getString("standard"));
+				pdp.setArea(jo.getString("area"));
+				pdp.setType(jo.getString("type"));
+				pdp.setuRate0(jo.getString("uRate0"));
+				pdp.setuRate1(jo.getString("uRate1"));
+				pdp.setuRate2(jo.getString("uRate2"));
+				pdp.setuRateBil(jo.getString("uRateBil"));
+				selectMap.put(jo.getString("gID"), pdp);
+			}
+		} catch (JSONException e) {
+			e.printStackTrace();
+			Toast.makeText(this, "盘点单商品数据错误！", 2000).show();
+		}
+	}
+}

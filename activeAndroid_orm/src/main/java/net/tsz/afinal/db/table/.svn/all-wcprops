@@ -1,0 +1,41 @@
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svn/!svn/ver/6/trunk/jusoft/trunk/activeAndroid_orm/src/main/java/net/tsz/afinal/db/table
+END
+OneToMany.java
+K 25
+svn:wc:ra_dav:version-url
+V 105
+/svn/!svn/ver/6/trunk/jusoft/trunk/activeAndroid_orm/src/main/java/net/tsz/afinal/db/table/OneToMany.java
+END
+ManyToOne.java
+K 25
+svn:wc:ra_dav:version-url
+V 105
+/svn/!svn/ver/6/trunk/jusoft/trunk/activeAndroid_orm/src/main/java/net/tsz/afinal/db/table/ManyToOne.java
+END
+TableInfo.java
+K 25
+svn:wc:ra_dav:version-url
+V 105
+/svn/!svn/ver/6/trunk/jusoft/trunk/activeAndroid_orm/src/main/java/net/tsz/afinal/db/table/TableInfo.java
+END
+Id.java
+K 25
+svn:wc:ra_dav:version-url
+V 98
+/svn/!svn/ver/6/trunk/jusoft/trunk/activeAndroid_orm/src/main/java/net/tsz/afinal/db/table/Id.java
+END
+Property.java
+K 25
+svn:wc:ra_dav:version-url
+V 104
+/svn/!svn/ver/6/trunk/jusoft/trunk/activeAndroid_orm/src/main/java/net/tsz/afinal/db/table/Property.java
+END
+KeyValue.java
+K 25
+svn:wc:ra_dav:version-url
+V 104
+/svn/!svn/ver/6/trunk/jusoft/trunk/activeAndroid_orm/src/main/java/net/tsz/afinal/db/table/KeyValue.java
+END

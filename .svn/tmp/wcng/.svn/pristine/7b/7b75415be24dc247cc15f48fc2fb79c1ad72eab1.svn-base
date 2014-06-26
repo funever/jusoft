@@ -1,0 +1,32 @@
+apply plugin: 'android'
+
+android {
+    compileSdkVersion 14
+    buildToolsVersion '19.0.3'
+
+    defaultConfig {
+        minSdkVersion 10
+        targetSdkVersion 17
+    }
+
+    buildTypes {
+        release {
+            runProguard false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.txt'
+        }
+    }
+}
+
+dependencies {
+    compile project(':activeAndroid_orm')
+    compile project(':bluetoochScanner')
+    compile project(':switchButton')
+    compile project(':pullToRefreshlibrary')
+    compile project(':viewpagerindicator')
+    compile 'com.actionbarsherlock:actionbarsherlock:4.4.0@aar'
+    compile 'com.android.support:support-v4:18.0.+'
+    compile files('libs/BlueToothTool.jar')
+    compile files('libs/core.jar')
+    compile files('libs/jpush-sdk-release1.5.5.jar')
+    compile files('libs/umeng_sdk.jar')
+}

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merger>
+
+    <dataSet config="4.4.0" >
+        <source path="E:\android_studio_workspace\jusoft\justSoft_gjp\build\exploded-aar\com.actionbarsherlock\actionbarsherlock\4.4.0\assets" />
+    </dataSet>
+    <dataSet config="unspecified" >
+        <source path="E:\android_studio_workspace\jusoft\justSoft_gjp\build\exploded-aar\jusoft\menudrawer\unspecified\assets" />
+    </dataSet>
+    <dataSet config="unspecified" >
+        <source path="E:\android_studio_workspace\jusoft\justSoft_gjp\build\exploded-aar\jusoft\viewpagerindicator\unspecified\assets" />
+    </dataSet>
+    <dataSet config="unspecified" >
+        <source path="E:\android_studio_workspace\jusoft\justSoft_gjp\build\exploded-aar\jusoft\pullToRefreshlibrary\unspecified\assets" />
+    </dataSet>
+    <dataSet config="unspecified" >
+        <source path="E:\android_studio_workspace\jusoft\justSoft_gjp\build\exploded-aar\jusoft\switchButton\unspecified\assets" />
+    </dataSet>
+    <dataSet config="unspecified" >
+        <source path="E:\android_studio_workspace\jusoft\justSoft_gjp\build\exploded-aar\jusoft\bluetoochScanner\unspecified\assets" />
+    </dataSet>
+    <dataSet config="unspecified" >
+        <source path="E:\android_studio_workspace\jusoft\justSoft_gjp\build\exploded-aar\jusoft\activeAndroid_orm\unspecified\assets" />
+    </dataSet>
+    <dataSet config="main" >
+        <source path="E:\android_studio_workspace\jusoft\justSoft_gjp\src\main\assets" />
+    </dataSet>
+    <dataSet config="debug" >
+        <source path="E:\android_studio_workspace\jusoft\justSoft_gjp\src\debug\assets" />
+    </dataSet>
+
+</merger>

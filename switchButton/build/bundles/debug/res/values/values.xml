@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- From: file:/E:/android_studio_workspace/jusoft/switchButton/src/main/res/values/attrs.xml -->
+    <eat-comment />
+
+    <declare-styleable name="Preference">
+        <attr name="enabled" format="boolean" />
+        <attr name="persistent" format="boolean" />
+        <attr name="titleCondensed" format="string" />
+        <attr name="alphabeticShortcut" format="string" />
+        <attr name="numericShortcut" format="string" />
+        <attr name="checkable" format="boolean" />
+        <attr name="selectable" format="boolean" />
+        <attr name="orderingFromXml" format="boolean" />
+        <attr name="key" format="string" />
+        <attr name="summary" format="string" />
+        <attr name="order" format="integer" />
+        <attr name="widgetLayout" format="reference" />
+        <attr name="dependency" format="string" />
+        <attr name="defaultValue" format="reference|string|integer|boolean|float" />
+        <attr name="shouldDisableView" format="boolean" />
+        <attr name="summaryOn" format="string" />
+        <attr name="summaryOff" format="string" />
+    </declare-styleable>
+    <!-- From: file:/E:/android_studio_workspace/jusoft/switchButton/src/main/res/values/dimen.xml -->
+    <eat-comment />
+
+    <dimen name="list_item_height">51.0dip</dimen>
+    <dimen name="preference_icon_width">50.0dip</dimen>
+    <dimen name="preference_margin">19.0dip</dimen>
+    <dimen name="preference_widget_icon_width">48.0dip</dimen>
+    <!-- From: file:/E:/android_studio_workspace/jusoft/switchButton/src/main/res/values/strings.xml -->
+    <eat-comment />
+
+    <string name="app_name">SwitchButton</string>
+    <string name="hello">Hello World, MovableCheckboxActivity!</string>
+
+</resources>

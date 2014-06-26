@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical" 
+    android:background="@drawable/dialog_bg"
+    >
+    <TextView 
+        android:background="@drawable/dialog_title_style"
+        android:text="商品备注"
+        android:textColor="#FFFFFF"
+        android:layout_width="fill_parent"
+        android:layout_height="40dp"
+        android:textSize="17dp"
+        android:gravity="center"
+        android:id="@+id/title"
+        />
+    <EditText 
+        android:layout_width="fill_parent"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginRight="15dp"
+        android:layout_marginBottom="15dp"
+        android:background="@drawable/all_round"
+        android:divider="#55999999"
+        android:id="@+id/pro_beizhu"
+        android:editable="false"
+        />
+</LinearLayout>

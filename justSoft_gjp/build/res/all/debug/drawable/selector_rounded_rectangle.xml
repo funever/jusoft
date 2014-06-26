@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	>
+	<item
+		android:state_pressed="true"
+		>
+		<shape
+			>
+			<gradient
+				android:startColor="#FF9FC5FF"
+				android:endColor="#FF9FC5FF"
+				android:angle="0.0"
+				android:centerColor="#FF9FC5FF"
+				>
+			</gradient>
+			<stroke
+				android:width="1.0dip"
+				android:color="#FFBBBBBB"
+				>
+			</stroke>
+			<corners
+				android:topLeftRadius="8.0dip"
+				android:topRightRadius="8.0dip"
+				android:bottomLeftRadius="8.0dip"
+				android:bottomRightRadius="8.0dip"
+				>
+			</corners>
+		</shape>
+	</item>
+	<item
+		>
+		<shape
+			>
+			<gradient
+				android:startColor="#FFFAFAFA"
+				android:endColor="#FFFAFAFA"
+				android:angle="0.0"
+				android:centerColor="#FFFAFAFA"
+				>
+			</gradient>
+			<stroke
+				android:width="1.0dip"
+				android:color="#FFBBBBBB"
+				>
+			</stroke>
+			<corners
+				android:topLeftRadius="8.0dip"
+				android:topRightRadius="8.0dip"
+				android:bottomLeftRadius="8.0dip"
+				android:bottomRightRadius="8.0dip"
+				>
+			</corners>
+		</shape>
+	</item>
+</selector>
+<!-- From: file:/E:/android_studio_workspace/jusoft/justSoft_gjp/src/main/res/drawable/selector_rounded_rectangle.xml -->

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+	xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="40dp"
+    android:gravity="center_vertical"
+    android:paddingLeft="10dp" 
+    android:paddingRight="10dp"
+    android:orientation="horizontal"
+    >
+    <TextView
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:layout_height="40dp"
+        android:text="商品全名:"
+        android:textSize="16dp"
+        android:gravity="center_vertical"
+        android:textColor="#000000" 
+        android:id="@+id/title"
+        />
+    <TextView
+        android:id="@+id/value"
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:layout_height="40dp"
+        android:gravity="center_vertical"
+        android:singleLine="true"
+        android:textColor="#0000ff"
+        android:textSize="15dp" />
+</LinearLayout>

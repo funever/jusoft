@@ -1,0 +1,360 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+
+    <string name="hello">Hello World, JetSoftActivity!</string>
+    <string name="app_name">营业通</string>
+    
+    <string name="server">jusoft.gnway.cc</string>
+    <string name="port">8081</string>
+    <string name="exception_file_path">/mnt/sdcard/justsoft/log</string>
+    
+    <!-- 验证菜单权url -->
+    <string name="menu_action">/AndroidWEB_GJP/rightCheck.do</string>
+    
+    <!-- 商品数据 -->
+    <string name="product_action">/AndroidWEB_GJP/goods.do</string>
+    <string name="product_pic_action">/AndroidWEB_GJP/goodsFile.do</string>
+    <string name="pic_path">/AndroidWEB_GJP/</string>
+    <string name="product_replace_action">/AndroidWEB_GJP/goodsReplace.do</string>
+    <string name="product_kucun_action">/AndroidWEB_GJP/stockFenBu.do</string>
+    <string name="product_price_action">/AndroidWEB_GJP/searchPrice.do</string>
+    <string name="product_pricesave_action">/AndroidWEB_GJP/updatePrice.do</string>
+    
+    <string name="product_void_stock">/AndroidWEB_GJP/voidStock.do</string>
+    <!-- 单位，部门，仓库，经手人数据 -->
+    <string name="entity_action">/AndroidWEB_GJP/headerContent.do</string>
+    <!-- 账户数据 -->
+    <string name="fkzh_action">/AndroidWEB_GJP/bursary.do</string>
+    <!-- 帐套数据 -->
+    <string name="zt_action">/AndroidWEB_GJP/login.do</string>
+    <!-- 注册加密狗 -->
+    <string name="dog_action">/AndroidWEB_GJP/dogReg.do</string>
+    <!-- 报表数据 -->
+    <string name="jhhz_action">/AndroidWEB_GJP/purchase.do</string>
+    <string name="xjyh_action">/AndroidWEB_GJP/cashBank.do</string>
+    <string name="wldw_action">/AndroidWEB_GJP/unitsTable.do</string>
+    <string name="kczk_action">/AndroidWEB_GJP/goodsStatus.do</string>
+    <string name="jylc_action">/AndroidWEB_GJP/bilQuery.do</string>
+    <string name="spcx_action">/AndroidWEB_GJP/goodsPrice.do</string>
+    <string name="xshz_action">/AndroidWEB_GJP/saleSummary.do</string>
+    
+    <string name="dxbh_action">/AndroidWEB_GJP/bilNumber.do</string>
+    
+    <!-- 表单提交  进货订单，销售订单-->
+    <string name="order_sale_action">/AndroidWEB_GJP/saveTable.do</string>
+    
+    <!-- 添加往来单位 -->
+    <string name="add_wldw_action">/AndroidWEB_GJP/addCompany.do</string>
+    <string name="selectarea_action">/AndroidWEB_GJP/selectArea.do</string>
+    <string name="selectBPrice_action">/AndroidWEB_GJP/selectBPrice.do</string>
+    <!-- 查询商品的库存信息 -->
+    <string name="pandian_pro_action">/AndroidWEB_GJP/goodsCheck.do</string>
+    <!-- 盘点时选择了日期和仓库后获取mID -->
+    <string name="pandian_mid_action">/AndroidWEB_GJP/saveCheck.do</string>
+    <!-- 提交盘点 -->
+    <string name="pandian_submit_action">/AndroidWEB_GJP/saveCheckDetail.do</string>
+    <!-- 获取订单列表 -->
+    <string name="order_action">/AndroidWEB_GJP/selectBil.do</string>
+    <!-- 获取商品价格信息 -->
+    <string name="product_price">/AndroidWEB_GJP/bilPrice.do</string>
+    <!-- 心跳 -->
+    <string name="alive_action">/AndroidWEB_GJP/alive.do</string>
+    <string name="draft_action">/AndroidWEB_GJP/bilDraft.do</string>
+    <!-- 单据界面上一张，下一张 -->
+    <string name="draft_last_next">/AndroidWEB_GJP/bilNext.do</string>
+    <!-- 打开草稿 -->
+    <string name="draft_load">/AndroidWEB_GJP/loadBil.do</string>
+    <!-- 检查单据编号 -->
+    <string name="checkbil_action">/AndroidWEB_GJP/checkBil.do</string>
+    <!-- 退出时发送 -->
+    <string name="exit_action">/AndroidWEB_GJP/exit.do</string>
+    <!-- 请求打印的url -->
+    <string name="print_action">/AndroidWEB_GJP/AutoPrintBil.do</string>
+    
+    <string name="default_summary">安卓</string>
+    <string name="print_result">OK!</string>
+    
+    <string-array name="exception_recever">
+       <item>funever@163.com</item>
+   </string-array>
+    
+    
+    <string name="send">连接扫描设备</string>
+    <string name="stop">停止设备服务</string>
+    <string name="not_connected">未连接设备</string>
+    <string name="bt_not_enabled_leaving">蓝牙未连接.</string>
+    <string name="title_connecting">连接中...</string>
+    <string name="title_connected_to">连接: </string>
+    <string name="title_not_connected">not connected</string>
+    
+    
+        <!--  smartshell bt jar begin -->
+    <string name="scanning">寻找设备...</string>
+    <string name="select_device">选择一个设备进行连接</string>
+    <string name="none_paired">没有配对设备</string>
+    <string name="none_found">未找到设备</string>
+    <string name="title_paired_devices">配对设备</string>
+    <string name="title_other_devices">其他可能的设备</string>
+    <string name="button_scan">扫描设备</string>
+          <!--  smartshell bt jar end -->  
+          
+    <string name="edit"><u>编辑</u></string>
+    <string name="je_more"><u>多</u></string>
+    
+    <!-- 现金银行细节 -->
+    <string name="financeDetail">/AndroidWEB_GJP/financeDetail.do</string>
+    <!-- 往来单位应收应付报表增加明细账功能 -->
+    <string name="utypeArapDetail">/AndroidWEB_GJP/utypeArapDetail.do</string>
+    
+    <string name="getWarnARTotal">/AndroidWEB_GJP/getWarnARTotal.do</string>
+    <string name="getWarnOrder">/AndroidWEB_GJP/getWarnOrder.do</string>
+    <string name="getMyAudit">/AndroidWEB_GJP/getMyAudit.do</string>
+    <string name="getProfitInfo">/AndroidWEB_GJP/getProfitInfo.do</string>
+	<string name="getGoodsSaleFenbu">/AndroidWEB_GJP/getGoodsSaleFenbu.do</string>
+	<string name="setBilAudit">/AndroidWEB_GJP/setBilAudit.do</string>
+	<string name="getGoodsBarCode">/AndroidWEB_GJP/getGoodsBarCode.do</string>
+	<string name="setGoodsBarCode">/AndroidWEB_GJP/setGoodsBarCode.do</string>
+	<string name="getWarnUpDown">/AndroidWEB_GJP/getWarnUpDown.do</string>
+	<string name="getCheckCount">/AndroidWEB_GJP/getCheckCount.do</string>
+	<string name="loadCheckCount">/AndroidWEB_GJP/loadCheckCount.do</string>
+	
+	<string-array name="menu_titles" tools:ignore="MissingTranslation">
+	    <item>报警簿</item>
+	    <item>进货管理</item>
+	    <item>销售管理</item>
+	    <item>库存管理</item>
+	    <item>钱流管理</item>
+	    <item>报表</item>
+	</string-array>
+	
+	<string-array name="warn_menu" translatable="false">
+	    <item>超期应收款报表</item>
+	    <item>进货订单报警报表</item>
+	    <item>销售订单报警报表</item>
+	    <item>库存上限报警</item>
+	    <item>库存下限报警</item>
+	</string-array>
+	
+	<string-array name="order_menu" translatable="false">
+	    <item>进货订单</item>
+	    <item>进货退货单</item>
+	    <item>进货单</item>
+	    <item>进货草稿管理</item>
+	</string-array>
+	
+	<string-array name="sale_menu">
+	    <item>外贸订单</item>
+	    <item>外贸销售单</item>
+	    <item>销售订单</item>
+	    <item>销售单</item>
+	    <item>销售退货</item>
+	    <item>销售草稿管理</item>
+	</string-array>
+	
+	<string-array name="kucun_menu">
+	    <item>变价调拨单</item>
+	    <item>同价调拨单</item>
+	    <item>库存盘点</item>
+	    <item>库存草稿管理</item>
+	</string-array>
+	
+	<string-array name="money_menu">
+	    <item>收款单</item>
+	    <item>付款单</item>
+	    <item>收付款草稿管理</item>
+	</string-array>
+	
+	<string-array name="baobiao_menu">
+	    <item>单位应收应付</item>
+	    <item>现金银行</item>
+	    <item>商品进货汇总表</item>
+	    <item>商品销售汇总表</item>
+	    <item>库存状况表</item>
+	    <item>经营历程</item>
+	    <item>商品查询</item>
+	    <item>单据审核</item>
+	    <item>利润表报表</item>
+	</string-array>
+	
+<string name="order_in_print_value" formatted="false">
+\u0020\u0020\u0020\u0020\u0020\u0020\u0020\u0020\u0020\u0020进货订单[LF]
+日期：%s[LF]
+编号：%s[LF]
+经手人：%s[LF]
+往来单位：%s[LF]
+收货仓库：%s[LF]
+摘要:%s[LF]
+-------------------------------[LF]
+品名[LF]
+数量|单价|金额[LF]
+%s
+-------------------------------[LF]
+折前金额合计：%s[LF]
+折后金额合计：%s[LF]
+[LF]
+[LF]
+[LF]
+</string>
+
+<string name="order_print_value" formatted="false">
+\u0020\u0020\u0020\u0020\u0020\u0020\u0020\u0020\u0020\u0020进货单[LF]
+日期：%s[LF]
+编号：%s[LF]
+经手人：%s[LF]
+往来单位：%s[LF]
+收货仓库：%s[LF]
+摘要:%s[LF]
+-------------------------------[LF]
+品名[LF]
+数量|单价|金额[LF]
+%s
+-------------------------------[LF]
+数量合计：%s[LF]
+折后金额合计：%s[LF]
+优惠金额：%s[LF]
+付款金额：%s[LF]
+付款帐号：%s[LF]
+[LF]
+[LF]
+[LF]
+</string>
+
+<string name="order_re_print_value" formatted="false">
+\u0020\u0020\u0020\u0020\u0020\u0020\u0020\u0020\u0020\u0020进货退货单[LF]
+日期：%s[LF]
+编号：%s[LF]
+经手人：%s[LF]
+往来单位：%s[LF]
+发货仓库：%s[LF]
+摘要:%s[LF]
+-------------------------------[LF]
+品名[LF]
+数量|单价|金额[LF]
+%s
+-------------------------------[LF]
+数量合计：%s[LF]
+折后金额合计：%s[LF]
+优惠金额：%s[LF]
+收款金额：%s[LF]
+收款帐号：%s[LF]
+[LF]
+[LF]
+[LF]
+</string>
+
+<string name="sale_in_print_value" formatted="false">
+\u0020\u0020\u0020\u0020\u0020\u0020\u0020\u0020\u0020\u0020%s[LF]
+日期：%s[LF]
+编号：%s[LF]
+经手人：%s[LF]
+往来单位：%s[LF]
+发货仓库：%s[LF]
+摘要:%s[LF]
+交货日期:%s[LF]
+-------------------------------[LF]
+品名[LF]
+数量|单价|金额[LF]
+%s
+-------------------------------[LF]
+数量合计：%s[LF]
+折前金额合计：%s[LF]
+折后金额合计：%s[LF]
+[LF]
+[LF]
+[LF]
+</string>
+
+<string name="sale_print_value" formatted="false">
+\u0020\u0020\u0020\u0020\u0020\u0020\u0020\u0020\u0020\u0020%s[LF]
+日期：%s[LF]
+编号：%s[LF]
+经手人：%s[LF]
+往来单位：%s[LF]
+发货仓库：%s[LF]
+摘要:%s[LF]
+交货日期:%s[LF]
+-------------------------------[LF]
+品名[LF]
+数量|单价|金额[LF]
+%s
+-------------------------------[LF]
+数量合计：%s[LF]
+折后金额合计：%s[LF]
+优惠金额：%s[LF]
+收款金额：%s[LF]
+收款帐号：%s[LF]
+[LF]
+[LF]
+[LF]
+</string>
+
+<string name="sale_re_print_value" formatted="false">
+\u0020\u0020\u0020\u0020\u0020\u0020\u0020\u0020\u0020\u0020销售退货[LF]
+日期：%s[LF]
+编号：%s[LF]
+经手人：%s[LF]
+往来单位：%s[LF]
+收货仓库：%s[LF]
+摘要:%s[LF]
+-------------------------------[LF]
+品名[LF]
+数量|单价|金额[LF]
+%s
+-------------------------------[LF]
+数量合计：%s[LF]
+折后金额合计：%s[LF]
+优惠金额：%s[LF]
+付款金额：%s[LF]
+付款帐号：%s[LF]
+[LF]
+[LF]
+[LF]
+</string>
+
+<string name="kucun_print_value" formatted="false">
+\u0020\u0020\u0020\u0020\u0020\u0020\u0020\u0020\u0020\u0020%s[LF]
+日期：%s[LF]
+编号：%s[LF]
+经手人：%s[LF]
+发货仓库：%s[LF]
+收货仓库：%s[LF]
+摘要:%s[LF]
+-------------------------------[LF]
+品名[LF]
+数量|单价|金额[LF]
+%s
+-------------------------------[LF]
+数量合计：%s[LF]
+金额合计：%s[LF]
+[LF]
+[LF]
+[LF]
+</string>
+
+<string name="money_print_value" formatted="false">
+\u0020\u0020\u0020\u0020\u0020\u0020\u0020\u0020\u0020\u0020%s[LF]
+[LF]
+日期：%s[LF]
+编号：%s[LF]
+%s单位：%s[LF]
+经手人：%s[LF]
+%s金额：%s[LF]
+%s账户：%s[LF]
+摘要:%s[LF]
+[LF]
+</string>
+<string name="print_product_info" formatted="false">
+%s[LF]
+%s|%s|%s[LF]
+</string>
+<string name="print_company_info" formatted="false">
+-------------------------------[LF]
+%s[LF]
+%s[LF]
+%s[LF]
+[LF]
+[LF]
+[LF]
+</string>
+    <string name="menu_config_default"> [{"items":[{"show":true,"title":"超期应收款报表"},{"show":true,"title":"进货订单报警报表"},{"show":true,"title":"销售订单报警报表"},{"show":true,"title":"库存上限报警"},{"show":true,"title":"库存下限报警"}],"show":true,"title":"报警簿"},{"items":[{"show":true,"title":"进货订单"},{"show":true,"title":"进货退货单"},{"show":true,"title":"进货单"},{"show":true,"title":"进货草稿管理"}],"show":true,"title":"进货管理"},{"items":[{"show":true,"title":"外贸订单"},{"show":true,"title":"外贸销售单"},{"show":true,"title":"销售订单"},{"show":true,"title":"销售单"},{"show":true,"title":"销售退货"},{"show":true,"title":"销售草稿管理"}],"show":true,"title":"销售管理"},{"items":[{"show":true,"title":"变价调拨单"},{"show":true,"title":"同价调拨单"},{"show":true,"title":"库存盘点"},{"show":true,"title":"库存草稿管理"}],"show":true,"title":"库存管理"},{"items":[{"show":true,"title":"收款单"},{"show":true,"title":"付款单"},{"show":true,"title":"收付款草稿管理"}],"show":true,"title":"钱流管理"},{"items":[{"show":true,"title":"单位应收应付"},{"show":true,"title":"现金银行"},{"show":true,"title":"商品进货汇总表"},{"show":true,"title":"商品销售汇总表"},{"show":true,"title":"库存状况表"},{"show":true,"title":"经营历程"},{"show":true,"title":"商品查询"},{"show":true,"title":"单据审核"},{"show":true,"title":"利润表报表"}],"show":true,"title":"报表"}]</string>
+</resources>

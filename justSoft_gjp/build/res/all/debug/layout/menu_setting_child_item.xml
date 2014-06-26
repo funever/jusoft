@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="40dp"
+    android:background="#ffffff"
+    >
+    <TextView 
+        android:layout_width="wrap_content"
+        android:layout_height="fill_parent"
+        android:id="@+id/group_title"
+        android:gravity="center_vertical"
+        android:layout_marginLeft="30dp"
+        android:text="text"
+        android:textSize="17dp"
+        android:textColor="@android:color/black"
+        android:layout_centerVertical="true"
+        />
+	<me.imid.view.SwitchButton 
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:layout_centerVertical="true"
+	    android:layout_alignParentRight="true"
+	    android:layout_marginRight="10dp"
+	    android:id="@+id/check"
+	    />
+</RelativeLayout>
+<!-- From: file:/E:/android_studio_workspace/jusoft/justSoft_gjp/src/main/res/layout/menu_setting_child_item.xml -->

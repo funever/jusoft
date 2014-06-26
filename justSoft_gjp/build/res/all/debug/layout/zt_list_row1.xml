@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="45dp"
+    android:gravity="center_vertical"
+    >
+    <TextView 
+        android:text="帐套列表"
+        android:layout_width="fill_parent"
+        android:layout_height="45dp"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="10dp"
+        android:textColor="@android:color/black"
+        android:textSize="16dp"
+        android:gravity="center_vertical"
+        />
+</RelativeLayout><!-- From: file:/E:/android_studio_workspace/jusoft/justSoft_gjp/src/main/res/layout/zt_list_row1.xml -->

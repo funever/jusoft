@@ -1,0 +1,47 @@
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/svn/!svn/ver/6/trunk/jusoft/trunk/justSoft_gjp/src/main/java/com/zxing/decoding
+END
+DecodeHandler.java
+K 25
+svn:wc:ra_dav:version-url
+V 99
+/svn/!svn/ver/6/trunk/jusoft/trunk/justSoft_gjp/src/main/java/com/zxing/decoding/DecodeHandler.java
+END
+DecodeFormatManager.java
+K 25
+svn:wc:ra_dav:version-url
+V 105
+/svn/!svn/ver/6/trunk/jusoft/trunk/justSoft_gjp/src/main/java/com/zxing/decoding/DecodeFormatManager.java
+END
+DecodeThread.java
+K 25
+svn:wc:ra_dav:version-url
+V 98
+/svn/!svn/ver/6/trunk/jusoft/trunk/justSoft_gjp/src/main/java/com/zxing/decoding/DecodeThread.java
+END
+FinishListener.java
+K 25
+svn:wc:ra_dav:version-url
+V 100
+/svn/!svn/ver/6/trunk/jusoft/trunk/justSoft_gjp/src/main/java/com/zxing/decoding/FinishListener.java
+END
+Intents.java
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svn/!svn/ver/6/trunk/jusoft/trunk/justSoft_gjp/src/main/java/com/zxing/decoding/Intents.java
+END
+CaptureActivityHandler.java
+K 25
+svn:wc:ra_dav:version-url
+V 108
+/svn/!svn/ver/6/trunk/jusoft/trunk/justSoft_gjp/src/main/java/com/zxing/decoding/CaptureActivityHandler.java
+END
+InactivityTimer.java
+K 25
+svn:wc:ra_dav:version-url
+V 101
+/svn/!svn/ver/6/trunk/jusoft/trunk/justSoft_gjp/src/main/java/com/zxing/decoding/InactivityTimer.java
+END

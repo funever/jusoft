@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" 
+    >
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:visibility="gone"
+        >
+        <EditText 
+            android:layout_width="fill_parent"
+            android:layout_height="40dp"
+            android:hint="输入要查询的单位"
+            android:id="@+id/search_dw"
+            android:background="@drawable/search_style"
+            android:textSize="16dp"
+            android:paddingLeft="8dp"
+            android:gravity="center_vertical"
+            android:singleLine="true"
+            />
+        <ImageView
+            android:id="@+id/search"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="8dp"
+            android:src="@drawable/search" />
+    </RelativeLayout>
+    <HorizontalScrollView 
+        android:layout_width="fill_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true"
+        >
+        <LinearLayout 
+            android:layout_width="wrap_content"
+        	android:layout_height="match_parent"
+        	android:orientation="vertical"
+            >
+   			 <include layout="@layout/outtime_list_item"/>
+            <com.handmark.pulltorefresh.library.PullToRefreshListView
+		        android:layout_width="fill_parent"
+		        android:layout_height="match_parent"
+		        android:divider="@drawable/list_devide"
+		        android:dividerHeight="1px"
+		        android:fadingEdge="none"
+		        android:smoothScrollbar="true" 
+		    	android:id="@+id/entity_list"
+		    	android:listSelector="@drawable/list_style"
+		        android:cacheColorHint="#00000000"
+	       />
+        </LinearLayout>
+    </HorizontalScrollView>
+
+</LinearLayout>

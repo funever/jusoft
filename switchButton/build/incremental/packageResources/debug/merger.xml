@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merger>
+
+    <dataSet config="main" >
+        <source path="E:\android_studio_workspace\jusoft\switchButton\src\main\res" >
+            <file
+                name="ic_launcher"
+                path="E:\android_studio_workspace\jusoft\switchButton\src\main\res\drawable-hdpi\ic_launcher.png"
+                qualifiers="hdpi"
+                type="drawable" />
+            <file
+                name="ic_launcher"
+                path="E:\android_studio_workspace\jusoft\switchButton\src\main\res\drawable-ldpi\ic_launcher.png"
+                qualifiers="ldpi"
+                type="drawable" />
+            <file
+                name="ic_launcher"
+                path="E:\android_studio_workspace\jusoft\switchButton\src\main\res\drawable-mdpi\ic_launcher.png"
+                qualifiers="mdpi"
+                type="drawable" />
+            <file
+                name="bottom"
+                path="E:\android_studio_workspace\jusoft\switchButton\src\main\res\drawable-xhdpi\bottom.png"
+                qualifiers="xhdpi"
+                type="drawable" />
+            <file
+                name="btn_pressed"
+                path="E:\android_studio_workspace\jusoft\switchButton\src\main\res\drawable-xhdpi\btn_pressed.png"
+                qualifiers="xhdpi"
+                type="drawable" />
+            <file
+                name="btn_unpressed"
+                path="E:\android_studio_workspace\jusoft\switchButton\src\main\res\drawable-xhdpi\btn_unpressed.png"
+                qualifiers="xhdpi"
+                type="drawable" />
+            <file
+                name="frame"
+                path="E:\android_studio_workspace\jusoft\switchButton\src\main\res\drawable-xhdpi\frame.png"
+                qualifiers="xhdpi"
+                type="drawable" />
+            <file
+                name="mask"
+                path="E:\android_studio_workspace\jusoft\switchButton\src\main\res\drawable-xhdpi\mask.png"
+                qualifiers="xhdpi"
+                type="drawable" />
+            <file
+                name="main"
+                path="E:\android_studio_workspace\jusoft\switchButton\src\main\res\layout\main.xml"
+                qualifiers=""
+                type="layout" />
+            <file
+                name="preference"
+                path="E:\android_studio_workspace\jusoft\switchButton\src\main\res\layout\preference.xml"
+                qualifiers=""
+                type="layout" />
+            <file
+                name="preference_widget_checkbox"
+                path="E:\android_studio_workspace\jusoft\switchButton\src\main\res\layout\preference_widget_checkbox.xml"
+                qualifiers=""
+                type="layout" />
+            <file
+                path="E:\android_studio_workspace\jusoft\switchButton\src\main\res\values\attrs.xml"
+                qualifiers="" >
+                <declare-styleable name="Preference" >
+                    <attr
+                        name="enabled"
+                        format="boolean" />
+                    <attr
+                        name="persistent"
+                        format="boolean" />
+                    <attr
+                        name="titleCondensed"
+                        format="string" />
+                    <attr
+                        name="alphabeticShortcut"
+                        format="string" />
+                    <attr
+                        name="numericShortcut"
+                        format="string" />
+                    <attr
+                        name="checkable"
+                        format="boolean" />
+                    <attr
+                        name="selectable"
+                        format="boolean" />
+                    <attr
+                        name="orderingFromXml"
+                        format="boolean" />
+                    <attr
+                        name="key"
+                        format="string" />
+                    <attr
+                        name="summary"
+                        format="string" />
+                    <attr
+                        name="order"
+                        format="integer" />
+                    <attr
+                        name="widgetLayout"
+                        format="reference" />
+                    <attr
+                        name="dependency"
+                        format="string" />
+                    <attr
+                        name="defaultValue"
+                        format="reference|string|integer|boolean|float" />
+                    <attr
+                        name="shouldDisableView"
+                        format="boolean" />
+                    <attr
+                        name="summaryOn"
+                        format="string" />
+                    <attr
+                        name="summaryOff"
+                        format="string" />
+                </declare-styleable>
+            </file>
+            <file
+                path="E:\android_studio_workspace\jusoft\switchButton\src\main\res\values\dimen.xml"
+                qualifiers="" >
+                <dimen name="preference_margin" >19.0dip
+                </dimen>
+                <dimen name="preference_icon_width" >50.0dip
+                </dimen>
+                <dimen name="preference_widget_icon_width" >48.0dip
+                </dimen>
+                <dimen name="list_item_height" >51.0dip
+                </dimen>
+            </file>
+            <file
+                path="E:\android_studio_workspace\jusoft\switchButton\src\main\res\values\strings.xml"
+                qualifiers="" >
+                <string name="app_name" >SwitchButton
+                </string>
+                <string name="hello" >Hello World, MovableCheckboxActivity!
+                </string>
+            </file>
+            <file
+                name="test4preference"
+                path="E:\android_studio_workspace\jusoft\switchButton\src\main\res\xml\test4preference.xml"
+                qualifiers=""
+                type="xml" />
+        </source>
+        <source path="E:\android_studio_workspace\jusoft\switchButton\build\res\rs\debug" />
+        <source path="E:\android_studio_workspace\jusoft\switchButton\build\res\generated\debug" />
+    </dataSet>
+    <dataSet config="debug" >
+        <source path="E:\android_studio_workspace\jusoft\switchButton\src\debug\res" />
+    </dataSet>
+
+</merger>

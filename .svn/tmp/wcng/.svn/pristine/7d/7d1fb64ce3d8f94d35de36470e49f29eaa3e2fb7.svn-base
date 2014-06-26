@@ -1,0 +1,123 @@
+package com.jetsoft;
+
+import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.List;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+import android.app.Activity;
+import android.content.Context;
+import android.content.SharedPreferences;
+import android.content.SharedPreferences.Editor;
+
+public class MenuController {
+
+    public static final String MENU_CONFIG = "menu_config";
+
+    public HashMap<String, Integer> groupLayout = new HashMap<String, Integer>();
+
+    private SharedPreferences preferences;
+
+    private Context ctx;
+
+    private Editor editor;
+
+    private int[] layouts = {R.layout.menu_warning_menu,
+            R.layout.menu_order_menu,
+            R.layout.menu_sale_menu,
+            R.layout.menu_kucun_menu,
+            R.layout.menu_money_menu,
+            R.layout.menu_pandian_menu};
+
+    public MenuController(Context context){
+        String[] titles = context.getResources().getStringArray(R.array.menu_titles);
+        preferences = context.getSharedPreferences(MENU_CONFIG,Activity.MODE_PRIVATE);
+        this.ctx = context;
+        editor = preferences.edit();
+        for(int i=0;i<titles.length;i++){
+            groupLayout.put(titles[i], layouts[i]);
+        }
+    }
+
+    public List<Group> getGroups(){
+        List<Group> groups = new LinkedList<Group>();
+        String config = preferences.getString(MENU_CONFIG, "");
+        if(config.equals("")){
+            init();
+        }
+        try {
+            JSONArray ja = new JSONArray(config);
+            for(int i=0;i<ja.length();i++){
+                JSONObject groupObject = ja.getJSONObject(i);
+                boolean show = groupObject.getBoolean("show");
+                if(!show){
+                    continue;
+                }
+                Group group = new Group();
+                group.setTitle(groupObject.getString("title"));
+                group.setShow(show);
+                String menu_name = groupObject.getString("title");
+                if(!groupLayout.containsKey(menu_name)){
+                    continue;
+                }
+                group.setLayoutId(groupLayout.get(menu_name),ctx);
+                LinkedList<Menu> mList = new LinkedList<Menu>();
+                JSONArray items = groupObject.getJSONArray("items");
+                for(int j=0;j<items.length();j++){
+                    JSONObject menuObject = items.getJSONObject(j);
+                    Menu m = new Menu();
+                    m.setTitle(menuObject.getString("title"));
+                    m.setShow(menuObject.getBoolean("show"));
+                    mList.add(m);
+                }
+                group.setmList(mList);
+                groups.add(group);
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        Group g = new  Group();
+        g.setTitle("设置");
+        g.setShow(true);
+        g.setLayoutId(R.layout.setting_ck_dw,ctx);
+        groups.add(g);
+        return groups;
+    }
+
+    /**
+     * 初始化配置
+     */
+    private void init(){
+        String[] menus = ctx.getResources().getStringArray(R.array.menu_titles);
+        String[][] children = new String[6][];
+        children[0] = ctx.getResources().getStringArray(R.array.warn_menu);
+        children[1] = ctx.getResources().getStringArray(R.array.order_menu);
+        children[2] = ctx.getResources().getStringArray(R.array.sale_menu);
+        children[3] = ctx.getResources().getStringArray(R.array.kucun_menu);
+        children[4] = ctx.getResources().getStringArray(R.array.money_menu);
+        children[5] = ctx.getResources().getStringArray(R.array.baobiao_menu);
+        try{
+            JSONArray ja = new JSONArray();
+            for(int i=0;i<menus.length;i++){
+                JSONObject jo = new JSONObject();
+                jo.put("title", menus[i]);
+                jo.put("show", true);
+                JSONArray itemList = new JSONArray();
+                String[] items = children[i];
+                for(int j=0;j<items.length;j++){
+                    JSONObject menu = new JSONObject();
+                    menu.put("title", items[j]);
+                    menu.put("show", true);
+                    itemList.put(menu);
+                }
+                jo.put("items", itemList);
+                ja.put(jo);
+            }
+            editor.putString(MENU_CONFIG, ja.toString());
+            editor.commit();
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+    }
+}

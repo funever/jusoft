@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merger>
+
+    <dataSet config="main" >
+        <source path="E:\android_studio_workspace\jusoft\bluetoochScanner\src\main\res" >
+            <file
+                name="dialog_bg"
+                path="E:\android_studio_workspace\jusoft\bluetoochScanner\src\main\res\drawable\dialog_bg.xml"
+                qualifiers=""
+                type="drawable" />
+            <file
+                name="dialog_title_style"
+                path="E:\android_studio_workspace\jusoft\bluetoochScanner\src\main\res\drawable\dialog_title_style.xml"
+                qualifiers=""
+                type="drawable" />
+            <file
+                name="transparent"
+                path="E:\android_studio_workspace\jusoft\bluetoochScanner\src\main\res\drawable\transparent.xml"
+                qualifiers=""
+                type="drawable" />
+            <file
+                name="activity_main_layout"
+                path="E:\android_studio_workspace\jusoft\bluetoochScanner\src\main\res\layout\activity_main_layout.xml"
+                qualifiers=""
+                type="layout" />
+            <file
+                name="bt_list"
+                path="E:\android_studio_workspace\jusoft\bluetoochScanner\src\main\res\layout\bt_list.xml"
+                qualifiers=""
+                type="layout" />
+            <file
+                name="bt_list_row"
+                path="E:\android_studio_workspace\jusoft\bluetoochScanner\src\main\res\layout\bt_list_row.xml"
+                qualifiers=""
+                type="layout" />
+            <file
+                path="E:\android_studio_workspace\jusoft\bluetoochScanner\src\main\res\values\dimens.xml"
+                qualifiers="" >
+                <dimen name="activity_horizontal_margin" >16dp
+                </dimen>
+                <dimen name="activity_vertical_margin" >16dp
+                </dimen>
+            </file>
+            <file
+                path="E:\android_studio_workspace\jusoft\bluetoochScanner\src\main\res\values\strings.xml"
+                qualifiers="" >
+                <string
+                    name="action_settings"
+                    translatable="false" >Settings
+                </string>
+                <string name="app_name" >BluetoochScanner
+                </string>
+                <string
+                    name="hello_world"
+                    translatable="false" >Hello world!
+                </string>
+            </file>
+            <file
+                path="E:\android_studio_workspace\jusoft\bluetoochScanner\src\main\res\values\styles.xml"
+                qualifiers="" >
+
+                <style
+                    name="dialog"
+                    parent="@android:style/Theme.Dialog" >
+                    <item name="android:windowFrame">
+@null
+                    </item>
+                    <item name="android:windowIsFloating">
+true
+                    </item>
+                    <item name="android:windowIsTranslucent">
+false
+                    </item>
+                    <item name="android:windowNoTitle">
+true
+                    </item>
+                    <item name="android:background">
+@null
+                    </item>
+                    <item name="android:windowBackground">
+@drawable/transparent
+                    </item>
+                    <item name="android:backgroundDimEnabled">
+true
+                    </item>
+                </style>
+            </file>
+        </source>
+        <source path="E:\android_studio_workspace\jusoft\bluetoochScanner\build\res\rs\release" />
+        <source path="E:\android_studio_workspace\jusoft\bluetoochScanner\build\res\generated\release" />
+    </dataSet>
+    <dataSet config="release" >
+        <source path="E:\android_studio_workspace\jusoft\bluetoochScanner\src\release\res" />
+    </dataSet>
+
+</merger>

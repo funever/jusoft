@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/main_bg"
+    android:orientation="vertical" >
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="50dp"
+        android:background="@drawable/titlebar_background" >
+        <TextView
+            android:id="@+id/navi_title"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:gravity="center"
+            android:text="列表"
+            android:textColor="#ffffff"
+            android:textSize="16dp" />
+        <Button
+            android:id="@+id/nv_return"
+            android:layout_width="55dp"
+            android:layout_height="38dp"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:background="@drawable/titlebar_back_btn_background"
+            android:paddingLeft="7dp"
+            android:text="返回"
+            android:textColor="#ffffff" />
+    </RelativeLayout>
+    <HorizontalScrollView 
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true"
+        >
+        <LinearLayout 
+            android:layout_width="wrap_content"
+        	android:layout_height="match_parent"
+        	android:orientation="vertical"
+            >
+            <include layout="@layout/detail_xjyh_item" android:visibility="gone"/>
+            <include layout="@layout/detail_wldw_item" android:visibility="gone"/>
+            <com.handmark.pulltorefresh.library.PullToRefreshListView 
+		        android:layout_width="fill_parent"
+		        android:layout_height="match_parent"
+		        android:divider="@drawable/list_devide"
+		        android:dividerHeight="1px"
+		    	android:id="@+id/entity_list"
+		    	android:listSelector="@drawable/list_style"
+		        android:cacheColorHint="#00000000"
+		        />
+          </LinearLayout>
+    </HorizontalScrollView>
+</LinearLayout>

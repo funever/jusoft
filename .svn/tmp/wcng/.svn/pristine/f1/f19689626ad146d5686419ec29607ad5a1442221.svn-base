@@ -1,0 +1,398 @@
+package com.jetsoft.activity.baobiao;
+
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.LinkedList;
+import java.util.List;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+import android.app.Dialog;
+import android.content.Intent;
+import android.os.AsyncTask;
+import android.os.Bundle;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
+import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.ListView;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
+import android.widget.Toast;
+import com.handmark.pulltorefresh.library.PullToRefreshBase;
+import com.handmark.pulltorefresh.library.PullToRefreshListView;
+import com.handmark.pulltorefresh.library.PullToRefreshBase.Mode;
+import com.handmark.pulltorefresh.library.PullToRefreshBase.OnRefreshListener;
+import com.jetsoft.R;
+import com.jetsoft.activity.SourceActivity;
+import com.jetsoft.activity.TabHostActivity;
+import com.jetsoft.activity.baobiao.DetailViewHolder;
+import com.jetsoft.activity.draft.DraftListActivity;
+import com.jetsoft.activity.dynic.DynicActivity;
+import com.jetsoft.activity.kucun.KuCunActivity;
+import com.jetsoft.activity.money.MoneyActivity;
+import com.jetsoft.activity.order.OrderActivity;
+import com.jetsoft.activity.returnorder.ReturnOrderActivity;
+import com.jetsoft.activity.sale.SaleActivity;
+import com.jetsoft.activity.sale.WaiMaoActivity;
+import com.jetsoft.activity.warning.ViewHolderAdatper;
+import com.jetsoft.entity.TableEntity;
+import com.jetsoft.io.CommunicationServer;
+import com.jetsoft.io.ExcuteThread;
+import com.jetsoft.utils.StaticValues;
+import com.jetsoft.utils.Utils;
+
+public class OrderCheckActivity extends SourceActivity implements
+		OnClickListener,OnItemClickListener{
+
+	ListView entityList;
+	PullToRefreshListView refreshList;
+
+	HashMap<String, String> params = new HashMap<String, String>();
+
+	String action;
+
+	List<HashMap<String, String>> dataList = new LinkedList<HashMap<String, String>>();
+
+	int page = 1;
+
+	ViewHolderAdatper adatper;
+	
+	Button research;
+	
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.order_check_list_page);
+
+		ret = (Button) findViewById(R.id.nv_return);
+		ret.setOnClickListener(this);
+		
+		research = (Button) findViewById(R.id.search);
+		research.setOnClickListener(this);
+		
+		refreshList = (PullToRefreshListView) findViewById(R.id.entity_list);
+		refreshList.setMode(Mode.PULL_FROM_END);
+		refreshList.setScrollingWhileRefreshingEnabled(false);
+		entityList = refreshList.getRefreshableView();
+
+		refreshList.getLoadingLayoutProxy().setReleaseLabel("上拉加载下一页");
+		refreshList.setOnRefreshListener(new OnRefreshListener<ListView>() {
+			@Override
+			public void onRefresh(PullToRefreshBase<ListView> refreshView) {
+				new GetDataTask().execute();
+			}
+		});
+
+		adatper = new ViewHolderAdatper(dataList, this,
+				DetailViewHolder.ORDERCHECK_TYPE);
+		entityList.setAdapter(adatper);
+		
+		entityList.setOnItemClickListener(this);
+		try{
+			params.put("szOperator", application.getUserEntity().getId());
+		}catch(Exception e){
+			Toast.makeText(this, "超时或不能获取用户，请重新登录!", 2000).show();
+			this.finish();
+		}
+		params.put("cpage", page++ + "");
+		params.put("cMode", "Z");
+		
+		action = getString(R.string.getMyAudit);
+		
+		showSearch();
+	}
+
+	@Override
+	public void onClick(View v) {
+	   if(v == search){
+			search(start_date_text.getText().toString(),end_date_text.getText().toString(),checked.isChecked());
+			dialog.dismiss();
+		}else if(v == ret){
+			this.finish();
+		}else if(v == research){
+			if(dialog!=null && dialog.isShowing()){
+				return;
+			}
+			showSearch();
+		}else if(v == start_date || v == end_date){
+			showChooseDate(v == start_date?start_date_text:end_date_text);
+		}
+	}
+
+	class GetContent extends ExcuteThread {
+
+		@Override
+		public void run() {
+			Utils.dismissProgressDialog();
+			JSONArray ja;
+			try {
+				ja = new JSONArray(getJsonString());
+				if (ja.length() == 0) {
+					Toast.makeText(OrderCheckActivity.this, "没有更多的数据了!",
+							Toast.LENGTH_SHORT).show();
+					refreshList.onRefreshComplete();
+					refreshList.setMode(Mode.DISABLED);
+					return;
+				}
+				for (int i = 0; i < ja.length(); i++) {
+					HashMap<String, String> map = new HashMap<String, String>();
+					JSONObject jo = ja.getJSONObject(i);
+					Iterator<String> keys = jo.keys();
+					while (keys.hasNext()) {
+						String key = keys.next();
+						map.put(key, jo.getString(key));
+					}
+					dataList.add(map);
+				}
+				adatper.notifyDataSetChanged();
+				refreshList.onRefreshComplete();
+			} catch (JSONException e) {
+				e.printStackTrace();
+			}
+		}
+	}
+
+	private class GetDataTask extends AsyncTask<Void, Void, String[]> {
+		@Override
+		protected String[] doInBackground(Void... arg0) {
+			params.put("cpage", (page++) + "");
+			CommunicationServer sc = new CommunicationServer(
+					OrderCheckActivity.this, application.getClient(), server
+							+ action, params, handler, new GetContent());
+			Thread t = new Thread(sc);
+			t.start();
+			return null;
+		}
+	}
+	
+	private TextView  start_date_text,end_date_text;
+	private RelativeLayout start_date,end_date;
+	private CheckBox checked;
+	private Button search;
+	private Dialog dialog;
+	public static final String ORDER_CHECK = "check_order";
+	public static final String ORDER_INFO = "check_order_info";
+	
+	
+	private void showSearch(){
+		if(dialog==null){
+			dialog = new Dialog(this, R.style.dialog);
+			dialog.setContentView(R.layout.order_check_dialog);
+			
+			start_date_text = (TextView) dialog.findViewById(R.id.start_date_text);
+			start_date_text.setText(Utils.getFormatDate(-30));
+			end_date_text = (TextView) dialog.findViewById(R.id.end_date_text);
+			end_date_text.setText(Utils.getFormatDate(0));
+			start_date = (RelativeLayout) dialog.findViewById(R.id.start_date);
+			end_date = (RelativeLayout) dialog.findViewById(R.id.end_date);
+			checked =  (CheckBox) dialog.findViewById(R.id.showChecked);
+			
+			start_date.setOnClickListener(this);
+			end_date.setOnClickListener(this);
+			
+			search = (Button) dialog.findViewById(R.id.submit);
+			search.setOnClickListener(this);
+		}
+		dialog.show();
+	}
+	
+	private void search(String sd,String ed,boolean checked){
+		params.put("szDateBegin", sd);
+		params.put("szDateEnd", ed);
+		params.put("nStates", checked?"1":"0");
+		page = 1;
+		dataList.clear();
+		adatper.notifyDataSetChanged();
+		new GetDataTask().execute();
+	}
+	
+	String cMode = "";
+	Class activityClass;
+	String selectProducts = "";
+	String sale_type = null;
+	String money_type = null;
+	/**
+	 * 获取草稿内容
+	 * @param de
+	 */
+	public void getDraftContent(HashMap<String, String> selectOrderInfo){
+		
+		activityClass = getDraftActivity(selectOrderInfo.get("bilType"));
+		
+		HashMap<String, String> params = new HashMap<String, String>();
+		String action_url = getString(R.string.draft_load);
+		params.put("cMode", "T");
+		params.put("nBilType",selectOrderInfo.get("bilType"));
+		params.put("nBilID", selectOrderInfo.get("bilID"));
+		params.put("szOperator", application.getUserEntity().getId());
+		
+		Utils.showProgressDialog("正在获取单据信息,请稍候……", this);
+		CommunicationServer cs = new CommunicationServer(this, application.getClient(), server+action_url,params, handler, new GetDraftContent(selectOrderInfo));
+		Thread t = new Thread(cs);
+		t.start();
+	}
+	
+	/**
+	 * 获取单据参数
+	 * @author funever_win8
+	 *
+	 */
+	class GetDraftContent extends ExcuteThread{
+		
+		HashMap<String, String> selectOrderInfo;
+		
+		public GetDraftContent(HashMap<String, String> selectOrderInfo){
+			this.selectOrderInfo = selectOrderInfo;
+		}
+		@Override
+		public void run() {
+			if(getJsonString().equals("[]")){
+				Toast.makeText(OrderCheckActivity.this, "没有可用的单据！", Toast.LENGTH_SHORT).show();
+				Utils.dismissProgressDialog();
+				return;
+			}else{
+				//填充值或者是下一步的请求商品操作
+//				Toast.makeText(BaseActivity.this, getJsonString(), Toast.LENGTH_SHORT).show();
+				try {
+					JSONArray ja = new JSONArray(getJsonString());
+					JSONObject jo = ja.getJSONObject(0);
+					TableEntity te = Utils.parseJSONObjectToObject(TableEntity.class, jo);
+
+					String action_url = getString(R.string.draft_load);
+					params.put("cMode", "D");
+					params.put("nBilType",selectOrderInfo.get("bilType"));
+					params.put("nBilID", selectOrderInfo.get("bilID"));
+					params.put("szOperator", application.getUserEntity().getId());
+					
+					CommunicationServer cs = new CommunicationServer(OrderCheckActivity.this, application.getClient(), server+action_url,params, handler, new GetDraftProduct(te,selectOrderInfo));
+					Thread t = new Thread(cs);
+					t.start();
+				}  catch (Exception e) {
+					e.printStackTrace();
+					Utils.dismissProgressDialog();
+				}
+			}
+		}
+	}
+	/**
+	 * 获取单据的商品
+	 * @author funever_win8
+	 *
+	 */
+	class GetDraftProduct extends ExcuteThread{
+		
+		TableEntity te;
+		
+		HashMap<String, String> selectOrderInfo;
+		
+		public GetDraftProduct(TableEntity te,HashMap<String, String> selectOrderInfo){
+			this.te = te;
+			this.selectOrderInfo = selectOrderInfo;
+		}
+		@Override
+		public void run() {
+			if(te!=null){
+				try {
+					selectProducts = getJsonString();
+					//跳转到各自的单据页面
+					toPage(te,selectOrderInfo);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}finally{
+					Utils.dismissProgressDialog();
+				}
+			}
+		}
+	}
+	/**
+	 * 获取到所有的参数后跳转到对应的单据页面
+	 * @param te
+	 */
+	public void toPage(TableEntity te,HashMap<String, String> selectOrderInfo){
+		if(activityClass == null){
+			return;
+		}
+		Intent intent = new Intent();
+		intent.setClass(this, activityClass);
+		intent.putExtra(DraftListActivity.DRAFT_TABLE, te);
+		intent.putExtra(DraftListActivity.DRAFT_PRODUCTS, selectProducts);
+		intent.putExtra(DraftListActivity.FROM_DRAFT, true);
+		intent.putExtra(DraftListActivity.DRAFT_BILTYPE, selectOrderInfo.get("bilType"));
+		intent.putExtra(DraftListActivity.DRAFT_TITLE, selectOrderInfo.get("bilName"));
+		intent.putExtra(DynicActivity.OPENTYPEAZ, selectOrderInfo.get("openTypeAZ"));
+		intent.putExtra("nBilType", selectOrderInfo.get("bilType"));
+		intent.putExtra("isEdit", false);
+		intent.putExtra(ORDER_CHECK, true);
+		intent.putExtra(ORDER_INFO, selectOrderInfo);
+		if(sale_type!=null){
+			intent.putExtra("sale_type", sale_type);
+		}
+		if(money_type!=null){
+			intent.putExtra("money_type", money_type);
+		}
+		startActivity(intent);
+	}
+	
+	/**
+	 * 获取单据class
+	 * @param nBilType
+	 * @return 单据页面activity的class
+	 */
+	private Class getDraftActivity(String nBilType){
+		if(nBilType.equals(StaticValues.ORDER_IN_BILTYPE)){
+			cMode = "B";
+			return TabHostActivity.class;
+		}else if(nBilType.equals(StaticValues.ORDER_BILTYPE)){
+			cMode = "B";
+			return OrderActivity.class;
+		}else if(nBilType.equals(StaticValues.ORDER_RE_BILTYPE)){
+			cMode = "B";
+			return ReturnOrderActivity.class;
+		}else if(nBilType.equals(StaticValues.SALE_IN_BILTYPE)){
+			sale_type = SaleActivity.SALE_ORDER;
+			cMode = "S";
+			return WaiMaoActivity.class;
+		}else if(nBilType.equals(StaticValues.SALE_BILTYPE)){
+			cMode = "S";
+			sale_type = SaleActivity.SALE_NOTE;
+			return SaleActivity.class;
+		}else if(nBilType.equals(StaticValues.SALE_RE_BILTYPE)){
+			cMode = "S";
+			sale_type = SaleActivity.SALE_RETURN;
+			return SaleActivity.class;
+		}else if(nBilType.equals(StaticValues.BIANJIA_BILTYPE)){
+			cMode = "O";
+			return KuCunActivity.class;
+		}else if(nBilType.equals(StaticValues.SK_BILTYPE)){
+			money_type = MoneyActivity.MONEY_SKD;
+			cMode = "A";
+			return MoneyActivity.class;
+		}else if(nBilType.equals(StaticValues.FK_BILTYPE)){
+			money_type = MoneyActivity.MONEY_FKD;
+			cMode = "A";
+			return MoneyActivity.class;
+		}else{
+			cMode = "B";
+			return DynicActivity.class;
+		}
+	}
+
+	@Override
+	public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
+		HashMap<String, String> selectOrderInfo = dataList.get(arg2-1);
+		String status = selectOrderInfo.get("state");
+		if(status.equals("已审核")){
+			Intent intent = new Intent();
+			intent.setClass(this, SubmitOrderCheckActivity.class);
+			intent.putExtra(OrderCheckActivity.ORDER_INFO, selectOrderInfo);
+			startActivity(intent);
+			return;
+		}else{
+			getDraftContent(selectOrderInfo);
+		}
+	}
+
+}

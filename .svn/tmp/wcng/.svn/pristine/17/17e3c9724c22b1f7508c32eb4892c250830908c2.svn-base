@@ -1,0 +1,274 @@
+package com.jetsoft.activity;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.HashMap;
+import org.json.JSONArray;
+import org.json.JSONObject;
+import com.jetsoft.R;
+import com.jetsoft.activity.draft.DraftListActivity;
+import com.jetsoft.activity.kucun.KuCunActivity;
+import com.jetsoft.activity.money.MoneyActivity;
+import com.jetsoft.activity.order.OrderActivity;
+import com.jetsoft.activity.returnorder.ReturnOrderActivity;
+import com.jetsoft.activity.sale.SaleActivity;
+import com.jetsoft.application.MyApplication;
+import com.jetsoft.entity.TableEntity;
+import com.jetsoft.io.CommunicationServer;
+import com.jetsoft.io.ExcuteThread;
+import com.jetsoft.utils.StaticValues;
+import com.jetsoft.utils.Utils;
+import android.app.Activity;
+import android.app.DatePickerDialog;
+import android.content.Intent;
+import android.content.SharedPreferences;
+import android.os.Bundle;
+import android.os.Handler;
+import android.view.View;
+import android.view.Window;
+import android.view.View.OnClickListener;
+import android.widget.Button;
+import android.widget.DatePicker;
+import android.widget.TextView;
+import android.widget.Toast;
+
+public class SourceActivity extends Activity {
+	
+	protected MyApplication application;
+	
+	protected SharedPreferences preferences;
+	
+	protected String server;
+	
+	protected Handler handler = new Handler();
+	
+	protected Button ret;
+	
+	Class activityClass;
+	
+	String selectProducts = "";
+	
+	String sale_type = null;
+	
+	String money_type = null;
+	
+	String cMode = "";
+	
+	protected String nBilType;
+	
+	protected String bilID;
+	
+	HashMap<String, String> params = new HashMap<String, String>();
+	
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		requestWindowFeature(Window.FEATURE_NO_TITLE);
+		application = (MyApplication) getApplication();
+		
+		preferences = getSharedPreferences(StaticValues.CONFIG, Activity.MODE_PRIVATE);
+		server = "http://"+preferences.getString(StaticValues.SERVER_FLAG, getString(R.string.server))+":"
+		+ preferences.getString(StaticValues.PORT_FLAG, getString(R.string.port));
+	}
+	
+	public void selectEntity(int requestCode,String searchString){
+		Intent intent = new Intent();
+		intent.setClass(this, EntityListActivity.class);
+		//供应商，客户标示。进货订单，进货单，进货退货单传0，销售订单，销售单，销售退货单传1，其他单据传2
+		if(requestCode == EntityListActivity.DW_RE_CODE){
+			intent.putExtra("isClient", "2");
+		}
+		intent.putExtra("pandian", true);
+		intent.putExtra("type", requestCode);
+		intent.putExtra("search", searchString);
+		startActivityForResult(intent, requestCode);
+	}
+	
+	public void showChooseDate(final TextView tv){
+		Calendar calendar = Calendar.getInstance();
+		Date d = new Date();
+		try {
+			d = new SimpleDateFormat("yyyy-MM-dd").parse(tv.getText().toString());
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		calendar.setTime(d);
+		DatePickerDialog dpd = new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
+			@Override
+			public void onDateSet(DatePicker view, int year, int monthOfYear,
+					int dayOfMonth) {
+				Calendar cal = Calendar.getInstance();
+				cal.set(Calendar.YEAR, year); 
+				cal.set(Calendar.MONTH, monthOfYear); 
+				cal.set(Calendar.DAY_OF_MONTH, dayOfMonth); 
+				tv.setText(new SimpleDateFormat("yyyy-MM-dd").format(cal.getTime()));
+			}
+		},  calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH));
+		dpd.show();
+	}
+	
+	/**
+	 * 获取草稿内容
+	 * @param de
+	 */
+	public void getDraftContent(){
+		
+		activityClass = getDraftActivity(nBilType);
+		
+		HashMap<String, String> params = new HashMap<String, String>();
+		String action_url = getString(R.string.draft_load);
+		params.put("cMode", "T");
+		params.put("nBilType",nBilType);
+		params.put("nBilID", bilID);
+		params.put("szOperator", application.getUserEntity().getId());
+		
+		Utils.showProgressDialog("正在获取单据信息,请稍候……", this);
+		CommunicationServer cs = new CommunicationServer(this, application.getClient(), server+action_url,params, handler, new GetDraftContent());
+		Thread t = new Thread(cs);
+		t.start();
+	}
+	
+	/**
+	 * 获取单据参数
+	 * @author funever_win8
+	 *
+	 */
+	class GetDraftContent extends ExcuteThread{
+		@Override
+		public void run() {
+			if(getJsonString().equals("[]")){
+				Toast.makeText(SourceActivity.this, "没有可用的单据！", Toast.LENGTH_SHORT).show();
+				Utils.dismissProgressDialog();
+				return;
+			}else{
+				//填充值或者是下一步的请求商品操作
+//				Toast.makeText(BaseActivity.this, getJsonString(), Toast.LENGTH_SHORT).show();
+				try {
+					JSONArray ja = new JSONArray(getJsonString());
+					JSONObject jo = ja.getJSONObject(0);
+					TableEntity te = Utils.parseJSONObjectToObject(TableEntity.class, jo);
+
+					String action_url = getString(R.string.draft_load);
+					params.put("cMode", "D");
+					params.put("nBilType",nBilType);
+					params.put("nBilID", bilID);
+					params.put("szOperator", application.getUserEntity().getId());
+					
+					CommunicationServer cs = new CommunicationServer(SourceActivity.this, application.getClient(), server+action_url,params, handler, new GetDraftProduct(te));
+					Thread t = new Thread(cs);
+					t.start();
+				}  catch (Exception e) {
+					e.printStackTrace();
+					Utils.dismissProgressDialog();
+				}
+			}
+		}
+	}
+	/**
+	 * 获取单据的商品
+	 * @author funever_win8
+	 *
+	 */
+	class GetDraftProduct extends ExcuteThread{
+		
+		TableEntity te;
+		
+		public GetDraftProduct(TableEntity te){
+			this.te = te;
+		}
+		@Override
+		public void run() {
+			if(te!=null){
+				try {
+					selectProducts = getJsonString();
+					//跳转到各自的单据页面
+					toPage(te);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}finally{
+					Utils.dismissProgressDialog();
+				}
+			}
+		}
+	}
+	/**
+	 * 获取到所有的参数后跳转到对应的单据页面
+	 * @param te
+	 */
+	public void toPage(TableEntity te){
+		if(activityClass == null){
+			return;
+		}
+		Intent intent = new Intent();
+		intent.setClass(this, activityClass);
+		intent.putExtra(DraftListActivity.DRAFT_TABLE, te);
+		intent.putExtra(DraftListActivity.DRAFT_PRODUCTS, selectProducts);
+		intent.putExtra(DraftListActivity.FROM_DRAFT, true);
+		intent.putExtra(DraftListActivity.DRAFT_BILTYPE, nBilType);
+		intent.putExtra("nBilType", nBilType);
+		intent.putExtra("isEdit", false);
+		if(sale_type!=null){
+			intent.putExtra("sale_type", sale_type);
+		}
+		if(money_type!=null){
+			intent.putExtra("money_type", money_type);
+		}
+		startActivity(intent);
+	}
+	
+	/**
+	 * 获取单据class
+	 * @param nBilType
+	 * @return 单据页面activity的class
+	 */
+	private Class getDraftActivity(String nBilType){
+		if(nBilType.equals(StaticValues.ORDER_IN_BILTYPE)){
+			cMode = "B";
+			return TabHostActivity.class;
+		}else if(nBilType.equals(StaticValues.ORDER_BILTYPE)){
+			cMode = "B";
+			return OrderActivity.class;
+		}else if(nBilType.equals(StaticValues.ORDER_RE_BILTYPE)){
+			cMode = "B";
+			return ReturnOrderActivity.class;
+		}else if(nBilType.equals(StaticValues.SALE_IN_BILTYPE)){
+			sale_type = SaleActivity.SALE_ORDER;
+			cMode = "S";
+			return SaleActivity.class;
+		}else if(nBilType.equals(StaticValues.SALE_BILTYPE)){
+			cMode = "S";
+			sale_type = SaleActivity.SALE_NOTE;
+			return SaleActivity.class;
+		}else if(nBilType.equals(StaticValues.SALE_RE_BILTYPE)){
+			cMode = "S";
+			sale_type = SaleActivity.SALE_RETURN;
+			return SaleActivity.class;
+		}else if(nBilType.equals(StaticValues.BIANJIA_BILTYPE)){
+			cMode = "O";
+			return KuCunActivity.class;
+		}else if(nBilType.equals(StaticValues.SK_BILTYPE)){
+			money_type = MoneyActivity.MONEY_SKD;
+			cMode = "A";
+			return MoneyActivity.class;
+		}else if(nBilType.equals(StaticValues.FK_BILTYPE)){
+			money_type = MoneyActivity.MONEY_FKD;
+			cMode = "A";
+			return MoneyActivity.class;
+		}
+		return null;
+	}
+	
+	public class SelectDateListener implements OnClickListener{
+		TextView tv;
+		public SelectDateListener(TextView tv){
+			this.tv = tv;
+		}
+		@Override
+		public void onClick(View v) {
+			Utils.showChooseDate(SourceActivity.this, tv);
+		}
+	}
+	
+}

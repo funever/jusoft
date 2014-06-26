@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:minWidth="700dp"
+    android:layout_height="40dp"
+    android:gravity="center_vertical"
+    android:id="@+id/check_product_list_item"
+    >
+    <TextView 
+        android:layout_width="0dp"
+        android:layout_weight="2"
+        android:layout_height="40dp"
+        android:layout_marginLeft="5dp"
+        android:textSize="16dp"
+        android:text="商品名"
+        android:id="@+id/pro_name"
+        android:textColor="@android:color/black"
+        android:background="@color/select_pro_c1"
+        android:gravity="center"
+        />
+       <TextView
+           android:id="@+id/pro_danwei"
+           android:layout_width="0dp"
+           android:layout_height="40dp"
+           android:layout_weight="1"
+           android:background="@color/select_pro_c2"
+           android:text="单位"
+           android:textColor="@android:color/black"
+           android:gravity="center"
+           android:textSize="16dp" />
+       <TextView
+           android:id="@+id/pro_shuliang"
+           android:layout_width="0dp"
+           android:layout_height="40dp"
+           android:layout_weight="1"
+           android:background="@color/select_pro_c1"
+           android:text="数量"
+           android:textColor="@android:color/black"
+           android:gravity="center"
+           android:textSize="16dp" />
+        <TextView
+           android:id="@+id/pro_danjia"
+           android:layout_width="0dp"
+           android:layout_height="40dp"
+           android:layout_weight="1"
+           android:background="@color/select_pro_c2"
+           android:text="单价"
+           android:textColor="@android:color/black"
+           android:gravity="center"
+           android:textSize="16dp" />
+        <TextView
+           android:id="@+id/pro_je"
+           android:layout_width="0dp"
+           android:layout_height="40dp"
+           android:layout_weight="1"
+           android:background="@color/select_pro_c1"
+           android:gravity="center"
+           android:text="金额"
+           android:textColor="@android:color/black"
+           android:textSize="16dp" />
+    <TextView
+           android:id="@+id/pro_fzsl"
+           android:layout_width="0dp"
+           android:layout_height="40dp"
+           android:layout_weight="1.5"
+           android:background="@color/select_pro_c2"
+           android:gravity="center"
+           android:text="辅助数量"
+           android:textColor="@android:color/black"
+           android:textSize="16dp" />
+    <TextView
+           android:id="@+id/pro_guige"
+           android:layout_width="0dp"
+           android:layout_height="40dp"
+           android:layout_weight="1"
+           android:background="@color/select_pro_c1"
+           android:gravity="center"
+           android:text="规格"
+           android:textColor="@android:color/black"
+           android:textSize="16dp" />
+    <TextView
+           android:id="@+id/pro_xinghao"
+           android:layout_width="0dp"
+           android:layout_height="40dp"
+           android:layout_weight="1"
+           android:background="@color/select_pro_c2"
+           android:gravity="center"
+           android:text="型号"
+           android:textColor="@android:color/black"
+           android:textSize="16dp" />
+    <TextView
+           android:id="@+id/pro_zp"
+           android:layout_width="0dp"
+           android:layout_height="40dp"
+           android:layout_weight="1"
+           android:gravity="center"
+           android:background="@color/select_pro_c1"
+           android:text="赠品"
+           android:textColor="@android:color/black"
+           android:textSize="16dp" />
+</LinearLayout><!-- From: file:/E:/android_studio_workspace/jusoft/justSoft_gjp/src/main/res/layout/check_product_list_item.xml -->

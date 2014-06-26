@@ -1,0 +1,387 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:fillViewport="true" >
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/all_round"
+        android:orientation="vertical" >
+
+        <RelativeLayout
+            android:id="@+id/baobiao_wldw"
+            android:layout_width="fill_parent"
+            android:layout_height="50dp"
+            android:clickable="true"
+            android:focusable="true"
+            android:gravity="center_vertical"
+             >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:layout_toRightOf="@id/menu_icon"
+                android:gravity="center_vertical"
+                android:paddingLeft="10dp"
+                android:text="单位应收应付"
+                android:textColor="#000000"
+                android:textSize="18dp" />
+
+            <ImageView
+                android:layout_width="6dip"
+                android:layout_height="12dip"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="15dip"
+                android:src="@drawable/home_index_arrow" />
+        <TextView 
+            android:layout_width="fill_parent"
+            android:layout_height="1px"
+            android:background="#cccccc"
+            android:layout_alignParentBottom="true"
+            />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/baobiao_xjyh"
+            android:layout_width="fill_parent"
+            android:layout_height="50dp"
+            android:clickable="true"
+            android:focusable="true"
+            android:gravity="center_vertical"
+            >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:layout_toRightOf="@id/menu_icon"
+                android:gravity="center_vertical"
+                android:paddingLeft="10dp"
+                android:text="现金银行"
+                android:textColor="#000000"
+                android:textSize="18dp" />
+
+            <ImageView
+                android:layout_width="6dip"
+                android:layout_height="12dip"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="15dip"
+                android:src="@drawable/home_index_arrow" />
+        <TextView 
+            android:layout_width="fill_parent"
+            android:layout_height="1px"
+            android:background="#cccccc"
+            android:layout_alignParentBottom="true"
+            />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/baobiao_jhhz"
+            android:layout_width="fill_parent"
+            android:layout_height="50dp"
+            android:clickable="true"
+            android:focusable="true"
+            android:gravity="center_vertical"
+            >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:layout_toRightOf="@id/menu_icon"
+                android:gravity="center_vertical"
+                android:paddingLeft="10dp"
+                android:text="商品进货汇总表"
+                android:textColor="#000000"
+                android:textSize="18dp" />
+
+            <ImageView
+                android:layout_width="6dip"
+                android:layout_height="12dip"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="15dip"
+                android:src="@drawable/home_index_arrow" />
+        <TextView 
+            android:layout_width="fill_parent"
+            android:layout_height="1px"
+            android:background="#cccccc"
+            android:layout_alignParentBottom="true"
+            />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/baobiao_xshz"
+            android:layout_width="fill_parent"
+            android:layout_height="50dp"
+            android:clickable="true"
+            android:focusable="true"
+            android:gravity="center_vertical"
+            >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:layout_toRightOf="@id/menu_icon"
+                android:gravity="center_vertical"
+                android:paddingLeft="10dp"
+                android:text="商品销售汇总表"
+                android:textColor="#000000"
+                android:textSize="18dp" />
+
+            <ImageView
+                android:layout_width="6dip"
+                android:layout_height="12dip"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="15dip"
+                android:src="@drawable/home_index_arrow" />
+        <TextView 
+            android:layout_width="fill_parent"
+            android:layout_height="1px"
+            android:background="#cccccc"
+            android:layout_alignParentBottom="true"
+            />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/baobiao_kczk"
+            android:layout_width="fill_parent"
+            android:layout_height="50dp"
+            android:clickable="true"
+            android:focusable="true"
+            android:gravity="center_vertical"
+            >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:layout_toRightOf="@id/menu_icon"
+                android:gravity="center_vertical"
+                android:paddingLeft="10dp"
+                android:text="库存状况表"
+                android:textColor="#000000"
+                android:textSize="18dp" />
+
+            <ImageView
+                android:layout_width="6dip"
+                android:layout_height="12dip"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="15dip"
+                android:src="@drawable/home_index_arrow" />
+        <TextView 
+            android:layout_width="fill_parent"
+            android:layout_height="1px"
+            android:background="#cccccc"
+            android:layout_alignParentBottom="true"
+            />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/baobiao_jylc"
+            android:layout_width="fill_parent"
+            android:layout_height="50dp"
+            android:clickable="true"
+            android:focusable="true"
+            android:gravity="center_vertical"
+            >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:layout_toRightOf="@id/menu_icon"
+                android:gravity="center_vertical"
+                android:paddingLeft="10dp"
+                android:text="经营历程"
+                android:textColor="#000000"
+                android:textSize="18dp" />
+
+            <ImageView
+                android:layout_width="6dip"
+                android:layout_height="12dip"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="15dip"
+                android:src="@drawable/home_index_arrow" />
+        <TextView 
+            android:layout_width="fill_parent"
+            android:layout_height="1px"
+            android:background="#cccccc"
+            android:layout_alignParentBottom="true"
+            />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/baobiao_spcx"
+            android:layout_width="fill_parent"
+            android:layout_height="50dp"
+            android:clickable="true"
+            android:focusable="true"
+            android:gravity="center_vertical"
+            >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:layout_toRightOf="@id/menu_icon"
+                android:gravity="center_vertical"
+                android:paddingLeft="10dp"
+                android:text="商品查询"
+                android:textColor="#000000"
+                android:textSize="18dp" />
+
+            <ImageView
+                android:layout_width="6dip"
+                android:layout_height="12dip"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="15dip"
+                android:src="@drawable/home_index_arrow" />
+        <TextView 
+            android:layout_width="fill_parent"
+            android:layout_height="1px"
+            android:background="#cccccc"
+            android:layout_alignParentBottom="true"
+            />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/draft_baobiao_action"
+            android:layout_width="fill_parent"
+            android:layout_height="50dp"
+            android:clickable="true"
+            android:focusable="true"
+            android:gravity="center_vertical"
+            android:visibility="gone" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:layout_toRightOf="@id/menu_icon"
+                android:gravity="center_vertical"
+                android:paddingLeft="10dp"
+                android:text="草稿查询"
+                android:textColor="#000000"
+                android:textSize="18dp" />
+
+            <ImageView
+                android:layout_width="6dip"
+                android:layout_height="12dip"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="15dip"
+                android:src="@drawable/home_index_arrow" />
+        <TextView 
+            android:layout_width="fill_parent"
+            android:layout_height="1px"
+            android:background="#cccccc"
+            android:layout_alignParentBottom="true"
+            />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/order_check"
+            android:layout_width="fill_parent"
+            android:layout_height="50dp"
+            android:clickable="true"
+            android:focusable="true"
+            android:gravity="center_vertical"
+            >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:layout_toRightOf="@id/menu_icon"
+                android:gravity="center_vertical"
+                android:paddingLeft="10dp"
+                android:text="单据审核"
+                android:textColor="#000000"
+                android:textSize="18dp" />
+
+            <ImageView
+                android:layout_width="6dip"
+                android:layout_height="12dip"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="15dip"
+                android:src="@drawable/home_index_arrow" />
+        <TextView 
+            android:layout_width="fill_parent"
+            android:layout_height="1px"
+            android:background="#cccccc"
+            android:layout_alignParentBottom="true"
+            />
+        </RelativeLayout>
+        <RelativeLayout
+            android:id="@+id/baobiao_profit"
+            android:layout_width="fill_parent"
+            android:layout_height="50dp"
+            android:clickable="true"
+            android:focusable="true"
+            android:gravity="center_vertical"
+            >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:layout_toRightOf="@id/menu_icon"
+                android:gravity="center_vertical"
+                android:paddingLeft="10dp"
+                android:text="利润表"
+                android:textColor="#000000"
+                android:textSize="18dp" />
+            <ImageView
+                android:layout_width="6dip"
+                android:layout_height="12dip"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="15dip"
+                android:src="@drawable/home_index_arrow" />
+        <TextView 
+            android:layout_width="fill_parent"
+            android:layout_height="1px"
+            android:background="#cccccc"
+            android:layout_alignParentBottom="true"
+            />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/baobiao_month_sale"
+            android:layout_width="fill_parent"
+            android:layout_height="50dp"
+            android:clickable="true"
+            android:focusable="true"
+            android:gravity="center_vertical"
+            android:visibility="gone"
+            >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:layout_toRightOf="@id/menu_icon"
+                android:gravity="center_vertical"
+                android:paddingLeft="10dp"
+                android:text="最近月销售"
+                android:textColor="#000000"
+                android:textSize="18dp" />
+
+            <ImageView
+                android:layout_width="6dip"
+                android:layout_height="12dip"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="15dip"
+                android:src="@drawable/home_index_arrow" />
+       <TextView 
+            android:layout_width="fill_parent"
+            android:layout_height="1px"
+            android:background="#cccccc"
+            android:layout_alignParentBottom="true"
+            />
+        </RelativeLayout>
+    </LinearLayout>
+
+</ScrollView><!-- From: file:/E:/android_studio_workspace/jusoft/justSoft_gjp/src/main/res/layout/menu_pandian_menu.xml -->

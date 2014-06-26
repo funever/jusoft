@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	>
+	<item
+		android:state_pressed="true"
+		>
+		<shape
+			>
+			<solid
+				android:color="#FF9FC5FF"
+				>
+			</solid>
+			<stroke
+				android:width="0.5dip"
+				android:color="#00000000"
+				>
+			</stroke>
+			<corners
+				android:topLeftRadius="8.0dip"
+				android:topRightRadius="8.0dip"
+				android:bottomLeftRadius="0.0dip"
+				android:bottomRightRadius="0.0dip"
+				>
+			</corners>
+		</shape>
+	</item>
+	<item
+		>
+		<shape
+			>
+			<solid
+				android:color="#00000000"
+				>
+			</solid>
+			<stroke
+				android:width="0.5dip"
+				android:color="#00000000"
+				>
+			</stroke>
+			<corners
+				android:topLeftRadius="8.0dip"
+				android:topRightRadius="8.0dip"
+				android:bottomLeftRadius="0.0dip"
+				android:bottomRightRadius="0.0dip"
+				>
+			</corners>
+		</shape>
+	</item>
+</selector>
+<!-- From: file:/E:/android_studio_workspace/jusoft/justSoft_gjp/src/main/res/drawable/sales_new_add_product.xml -->

@@ -1,0 +1,29 @@
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/svn/!svn/ver/6/trunk/jusoft/trunk/activeAndroid_orm/src/main/java/net/tsz/afinal/exception
+END
+AfinalException.java
+K 25
+svn:wc:ra_dav:version-url
+V 112
+/svn/!svn/ver/6/trunk/jusoft/trunk/activeAndroid_orm/src/main/java/net/tsz/afinal/exception/AfinalException.java
+END
+ViewException.java
+K 25
+svn:wc:ra_dav:version-url
+V 110
+/svn/!svn/ver/6/trunk/jusoft/trunk/activeAndroid_orm/src/main/java/net/tsz/afinal/exception/ViewException.java
+END
+HttpException.java
+K 25
+svn:wc:ra_dav:version-url
+V 110
+/svn/!svn/ver/6/trunk/jusoft/trunk/activeAndroid_orm/src/main/java/net/tsz/afinal/exception/HttpException.java
+END
+DbException.java
+K 25
+svn:wc:ra_dav:version-url
+V 108
+/svn/!svn/ver/6/trunk/jusoft/trunk/activeAndroid_orm/src/main/java/net/tsz/afinal/exception/DbException.java
+END

@@ -1,0 +1,35 @@
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/svn/!svn/ver/6/trunk/jusoft/trunk/switchButton/src/main/res/drawable-xhdpi
+END
+btn_unpressed.png
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svn/!svn/ver/6/trunk/jusoft/trunk/switchButton/src/main/res/drawable-xhdpi/btn_unpressed.png
+END
+bottom.png
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/svn/!svn/ver/6/trunk/jusoft/trunk/switchButton/src/main/res/drawable-xhdpi/bottom.png
+END
+mask.png
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svn/!svn/ver/6/trunk/jusoft/trunk/switchButton/src/main/res/drawable-xhdpi/mask.png
+END
+frame.png
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/svn/!svn/ver/6/trunk/jusoft/trunk/switchButton/src/main/res/drawable-xhdpi/frame.png
+END
+btn_pressed.png
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/svn/!svn/ver/6/trunk/jusoft/trunk/switchButton/src/main/res/drawable-xhdpi/btn_pressed.png
+END

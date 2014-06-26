@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical"
+    android:id="@+id/operate_in"
+    android:background="@drawable/main_bg" 
+    >
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="50dp"
+        android:background="@drawable/titlebar_background" >
+        <TextView
+            android:id="@+id/navi_title"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:gravity="center"
+            android:textSize="16dp"
+            android:text="调订单"
+            android:textColor="#ffffff"
+             />
+        <Button 
+            android:layout_width="55dp"
+            android:layout_height="35dp"
+            android:id="@+id/nv_return"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:text="返回"
+            android:textColor="#ffffff"
+            android:paddingLeft="5dp"
+            android:background="@drawable/titlebar_back_btn_background"
+            />
+        <Button 
+            android:layout_width="55dp"
+            android:layout_height="35dp"
+            android:id="@+id/nv_save"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:text="确定"
+            android:textColor="#ffffff"
+            android:layout_marginRight="5dp"
+            android:background="@drawable/titlebar_help_btn_background"
+            android:visibility="invisible"
+            />
+    </RelativeLayout>
+    <ViewFlipper
+        android:id="@+id/vf"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        >
+        <include layout="@layout/tiao_order_in_layout"/>
+        <include layout="@layout/tiao_order_list"/>
+        <include layout="@layout/tiao_product_list"/>
+    </ViewFlipper>
+</LinearLayout>

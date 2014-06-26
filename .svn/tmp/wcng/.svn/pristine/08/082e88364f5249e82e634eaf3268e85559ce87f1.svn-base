@@ -1,0 +1,760 @@
+/**
+ * 创建日期 2012-12-19
+ * 创建用户 Administrator
+ * 变更情况:
+ * 文档位置 $Archive$
+ * 最后变更 $Author$
+ * 变更日期 $Date$
+ * 当前版本 $Revision$
+ * 
+ * Copyright (c) 2004 Sino-Japanese Engineering Corp, Inc. All Rights Reserved.
+ * 
+ */
+package com.jetsoft.activity;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.List;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+import com.jetsoft.R;
+import com.jetsoft.activity.baobiao.BaoBiaoItemActivity;
+import com.jetsoft.activity.kucun.KuCunActivity;
+import com.jetsoft.activity.product.ProImgGridActivity;
+import com.jetsoft.application.MyApplication;
+import com.jetsoft.entity.BaseEntity;
+import com.jetsoft.entity.ProductEntity;
+import com.jetsoft.io.CommunicationServer;
+import com.jetsoft.io.ExcuteThread;
+import com.jetsoft.utils.StaticValues;
+import com.jetsoft.utils.Utils;
+import com.umeng.analytics.MobclickAgent;
+import android.app.Activity;
+import android.app.Dialog;
+import android.content.Intent;
+import android.content.SharedPreferences;
+import android.os.Bundle;
+import android.os.Handler;
+import android.text.InputType;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.view.ViewGroup;
+import android.view.Window;
+import android.widget.BaseAdapter;
+import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.EditText;
+import android.widget.ListView;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
+import android.widget.Toast;
+
+public class ChooseProductAcitivity extends Activity implements OnClickListener{
+	
+	/**
+	 * 选择商品
+	 */
+	private RelativeLayout choose_pro;
+	/**
+	 * 返回和保存
+	 */
+	private Button ret,save,del_pro,pro_copy;
+	
+	private EditText pro_num,pro_count,pro_zhekou,pro_shuilv,pro_memo;
+	
+	private TextView pro_name,pro_urate;
+	
+//	private CustomSinnper pro_danwei;
+	
+	/**
+	 * 是否是赠品
+	 */
+	private CheckBox isZengPin;
+	/**
+	 * 选中的产品
+	 */
+	private ProductEntity entity;
+	
+	int index;
+	
+	/**
+	 * 如果是库存，不显示折扣和税率;
+	 */
+	boolean kucun;
+	
+	int rightCost = 1;
+	
+	int BilPrice = 1;
+	
+	String[] danwei = new String[]{"袋","箱"};
+	
+	boolean waimao;
+	
+	MyApplication application;
+	
+	Button pro_img,pro_replace,pro_kucun,pro_price,pro_beizhu;
+	
+	String nBilType = "";
+	
+	String sid,uid;
+	/**
+	 * 1 = 变价单
+	 * 2 = 同价单
+	 * 同价，价格不能修改
+	 */
+	int kucun_type;
+	
+	Handler handler = new Handler();
+	
+	HashMap<String, String> paramMap = new HashMap<String, String>();
+	
+	String server;
+	
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		requestWindowFeature(Window.FEATURE_NO_TITLE);
+		setContentView(R.layout.choose_product);
+		application = (MyApplication) getApplication();
+		
+		SharedPreferences preferences = getSharedPreferences(StaticValues.CONFIG, Activity.MODE_PRIVATE);
+		server = "http://"+preferences.getString(StaticValues.SERVER_FLAG, getString(R.string.server))+":"
+				+ preferences.getString(StaticValues.PORT_FLAG, getString(R.string.port));
+		
+		entity = (ProductEntity) getIntent().getSerializableExtra("entity");
+		index = getIntent().getIntExtra("index", 0);
+		kucun = getIntent().getBooleanExtra("kucun", false);
+		waimao = getIntent().getBooleanExtra("waimao", false);
+		rightCost = getIntent().getIntExtra("RightCost", 1);
+		BilPrice = ((MyApplication)getApplication()).getBilPrice();
+		
+		choose_pro = (RelativeLayout) findViewById(R.id.choose_pro);
+		ret = (Button) findViewById(R.id.nv_return);
+		save = (Button) findViewById(R.id.nv_save);
+		choose_pro.setOnClickListener(this);
+		ret.setOnClickListener(this);
+		save.setOnClickListener(this);
+		
+		del_pro = (Button) findViewById(R.id.pro_delete);
+		del_pro.setOnClickListener(this);
+		pro_copy = (Button) findViewById(R.id.pro_copy);
+		pro_copy.setOnClickListener(this);
+		
+		pro_num = (EditText) findViewById(R.id.pro_num);
+		pro_num.setText(entity.getNumUnit1()+"");
+//		if(waimao){
+			pro_num.setOnClickListener(new OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					editNum();
+				}
+			});
+//		}
+		pro_count = (EditText) findViewById(R.id.pro_count);
+		
+		if(rightCost==1){
+			pro_count.setText(StaticValues.format(entity.getPriceRec(), application.getPriceDigit()));
+		}else{
+			pro_count.setText("*");
+			pro_count.setInputType(InputType.TYPE_TEXT_VARIATION_PASSWORD);
+		}
+		
+		pro_zhekou = (EditText) findViewById(R.id.pro_zhekou);
+		pro_zhekou.setText(StaticValues.format(entity.getDisRec(),application.getPriceDigit()));
+		pro_name = (TextView) findViewById(R.id.pro_name);
+		pro_name.setText(entity.getFullName());
+		pro_urate = (TextView) findViewById(R.id.pro_urate);
+		pro_urate.setText(entity.getUnitNameList());
+		
+//		pro_danwei = (CustomSinnper) findViewById(R.id.pro_danwei);
+//		ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
+//				R.layout.spinner_item, danwei);
+//		pro_danwei.setAdapter(adapter);
+		
+		pro_shuilv = (EditText) findViewById(R.id.pro_shuilv);
+		pro_shuilv.setText(entity.getTax()+"");
+		
+		pro_memo = (EditText) findViewById(R.id.pro_memo);
+		pro_memo.setText(entity.getMemo());
+		
+		/**
+		 * 如果是赠品则勾选
+		 */
+		isZengPin = (CheckBox) findViewById(R.id.pro_zengpin);
+		if(entity.getLargess().equals("1")){
+			isZengPin.setChecked(true);
+		}
+		
+		if(kucun){
+			((View) pro_zhekou.getParent()).setVisibility(View.GONE);
+			((View) pro_shuilv.getParent()).setVisibility(View.GONE);
+			findViewById(R.id.line_zhekou).setVisibility(View.GONE);
+			findViewById(R.id.line_shuilv).setVisibility(View.GONE);
+			findViewById(R.id.zengping_layout).setVisibility(View.GONE);
+		}
+		nBilType = getIntent().getStringExtra("nBilType");
+		sid = getIntent().getStringExtra("szSid");
+		uid = getIntent().getStringExtra("szUid");
+		kucun_type = getIntent().getIntExtra("kucun_type", 1);
+		
+		if(kucun_type == KuCunActivity.KUCUN_TONGJIA){
+			pro_count.setCursorVisible(false);      //设置输入框中的光标不可见  
+			pro_count.setFocusable(false);           //无焦点  
+			pro_count.setFocusableInTouchMode(false);
+		}
+		
+		if(BilPrice==0 && nBilType!=null 
+				&& 
+				(nBilType.equals(StaticValues.SALE_BILTYPE)
+						||nBilType.equals(StaticValues.SALE_IN_BILTYPE)
+						||nBilType.equals(StaticValues.SALE_RE_BILTYPE)
+						)){
+			pro_count.setEnabled(false);
+			pro_zhekou.setEnabled(false);
+		}
+		
+		pro_img = (Button) findViewById(R.id.pro_img);
+		pro_img.setOnClickListener(this);
+		pro_replace = (Button) findViewById(R.id.pro_replace);
+		pro_replace.setOnClickListener(this);
+		pro_kucun = (Button) findViewById(R.id.pro_kucun);
+		pro_kucun.setOnClickListener(this);
+		pro_price = (Button) findViewById(R.id.pro_price);
+		pro_price.setOnClickListener(this);
+		pro_beizhu = (Button) findViewById(R.id.pro_beizhu);
+		pro_beizhu.setOnClickListener(this);
+		
+		if(nBilType.equals(StaticValues.ORDER_IN_BILTYPE) 
+				|| nBilType.equals(StaticValues.ORDER_BILTYPE)
+				|| nBilType.equals(StaticValues.ORDER_RE_BILTYPE)
+				|| nBilType.equals(StaticValues.BIANJIA_BILTYPE)){
+			pro_price.setVisibility(View.GONE);
+			if(nBilType.equals(StaticValues.BIANJIA_BILTYPE)){
+				pro_replace.setVisibility(View.GONE);
+			}
+		}
+		
+		if(waimao){
+			pro_replace.setVisibility(View.GONE);
+		}
+		
+		//进入时的动画
+		overridePendingTransition(R.anim.push_left_in, R.anim.push_left_out);
+		
+		String action = getString(R.string.product_void_stock);
+		HashMap<String, String> param_void_num = new HashMap<String, String>();
+		param_void_num.put("cMode", "Z");
+		param_void_num.put("szGID", entity.getId());
+		param_void_num.put("szSID", sid);
+		param_void_num.put("szOperator", application.getUserEntity()!=null?application.getUserEntity().getId():"");
+		
+		CommunicationServer cs = new CommunicationServer(this, application.getClient(), server+action, param_void_num, new Handler(), new GetProductVoid(entity));
+		Thread t = new Thread(cs);
+		t.start();
+	}
+	
+	class GetProductVoid extends ExcuteThread{
+		
+		ProductEntity request_entity;
+		
+		boolean isReplace = false;
+		
+		public GetProductVoid(ProductEntity entity){
+			this.request_entity = entity;
+		}
+		
+		public GetProductVoid(ProductEntity entity,boolean isReplace){
+			this.request_entity = entity;
+			this.isReplace = isReplace;
+		}
+		
+		@Override
+		public void run() {
+			//{"area":"产地","fullName":"商品1","num":200,"standard":"规格","type":"型号","uRate":"","unit1":"g","unit2":"gg","voidNum":472}
+			try {
+				JSONArray ja = new JSONArray(getJsonString());
+				if(ja.length()>0){
+					JSONObject jo = ja.getJSONObject(0);
+					Utils.setObjectValue(request_entity, jo,"unit1","num");
+				}
+				if(isReplace){
+					showProductInfo(this.request_entity);
+				}
+			} catch (JSONException e) {
+				Toast.makeText(ChooseProductAcitivity.this, "获取商品虚拟库存信息异常!", Toast.LENGTH_SHORT).show();
+			}finally{
+				Utils.dismissProgressDialog();
+			}
+		}
+	}
+
+	@Override
+	public void onClick(View v) {
+		if(v == ret){
+			this.finish();
+			//销毁时的动画
+			overridePendingTransition(R.anim.push_right_in, R.anim.push_right_out);
+		}else if(v == choose_pro){
+			//暂时不处理
+		}else if(v == save){
+			if(entity == null){
+				Toast.makeText(this, "还没有选择商品！", Toast.LENGTH_SHORT).show();
+				return;
+			}
+			float count =Float.parseFloat(StaticValues.format(entity.getPriceRec(), application.getPriceDigit())) ;
+			try{
+				count = Float.parseFloat(pro_count.getText().toString());
+			}catch(Exception e){
+				e.printStackTrace();
+			}
+			entity.setPriceRec(count+"");
+			entity.setDisRec(pro_zhekou.getText().toString());
+			
+			try {
+				float tax = Float.parseFloat(pro_shuilv.getText().toString());
+				entity.setTax(tax);
+			} catch (Exception e) {
+				entity.setTax(0);
+			}
+			
+			if(isZengPin.isChecked()&&!kucun){
+				entity.setLargess("1");
+				entity.setPriceRec(0+"");
+//				entity.setDisRec(0+"");
+//				entity.setTax(0);
+			}else{
+				entity.setLargess("0");
+			}
+			
+			/**
+			 * 商品添加描述
+			 */
+			entity.setMemo(pro_memo.getText().toString());
+			
+			Intent intent = new Intent();
+			intent.putExtra("index", index);
+			intent.putExtra("entity", entity);
+			setResult(RESULT_OK, intent);
+			this.finish();
+			overridePendingTransition(R.anim.push_right_in, R.anim.push_right_out);
+		}else if(v == del_pro){
+			Intent intent = new Intent();
+			intent.putExtra("index", index);
+			setResult(EntityListActivity.DELETE_PRODUCT, intent);
+			this.finish();
+			overridePendingTransition(R.anim.push_right_in, R.anim.push_right_out);
+		}else if(v == pro_img){
+			//查看商品图片
+			Intent intent = new Intent();
+			intent.setClass(this, ProImgGridActivity.class);		
+			intent.putExtra("szGid", entity.getId());
+			startActivity(intent);
+		}else if(v == pro_replace){
+			search();
+		}else if(v == pro_kucun){
+			kucunAction();
+		}else if(v == pro_price){
+			priceAction();
+		}else if(v == pro_copy){
+			if(entity.isCopy()){
+				Toast.makeText(this, "该商品本身是复制商品，不能继续复制，请从上一个商品进行复制！", 2000).show();
+				return;
+			}
+			ProductEntity copyEntity = entity.getCloneProduct();
+			Intent intent = new Intent();
+			intent.putExtra("index", index);
+			intent.putExtra("entity", copyEntity);
+			setResult(EntityListActivity.COPY_PRODUCT, intent);
+			this.finish();
+			overridePendingTransition(R.anim.push_right_in, R.anim.push_right_out);
+		}else if(v == pro_beizhu){
+			showProductBeizhu();
+		}
+	}
+	
+	/**
+	 * 修改数量
+	 * 计算数量=基本数量* URate0+ URate1*辅助数量1+ URate2*辅助数量2
+	 * 单据界面的商品数量=计算数量/URateBil
+	 */
+	public void editNum(){
+		final Dialog dialog = new Dialog(this, R.style.dialog);
+		dialog.setContentView(R.layout.waimao_edit_num_price);
+		final EditText pro_count = (EditText) dialog.findViewById(R.id.pro_num);
+		final EditText pro_unit1 = (EditText) dialog.findViewById(R.id.pro_unit1);
+		final EditText pro_unit2 = (EditText) dialog.findViewById(R.id.pro_unit2);
+//		EditText pro_price = (EditText) dialog.findViewById(R.id.pro_price);
+		dialog.findViewById(R.id.price_layout).setVisibility(View.GONE);
+		dialog.findViewById(R.id.ok).setOnClickListener(new OnClickListener(){
+			public void onClick(View v) {
+				float num = 0;
+				try{
+					num = Float.parseFloat(pro_count.getText().toString());
+				}catch(Exception e){
+					num = 0;
+				}
+				float unit1 = 0;
+				try{
+					unit1 = Float.parseFloat(pro_unit1.getText().toString());
+				}catch(Exception e){
+					unit1 = 0;
+				}
+				float unit2 = 0;
+				try{
+					unit2 = Float.parseFloat(pro_unit2.getText().toString());
+				}catch(Exception e){
+					unit2 = 0;
+				}
+//				float urate = 1;
+//				try{
+//					urate = Float.parseFloat(entity.getuRate0());
+//				}catch(Exception e){
+//					urate = 1;
+//				}
+				float count = num*Float.parseFloat(entity.getuRate0())+unit1*Float.parseFloat(entity.getuRate1())+unit2*Float.parseFloat(entity.getuRate2());
+				entity.setNum(count);
+				float uRateBil  = 1;
+				try{
+					uRateBil = Float.parseFloat(entity.getuRateBil());
+				}catch(Exception e){
+					e.printStackTrace();
+				}
+				entity.setNumUnit1(Float.parseFloat(StaticValues.format(count/uRateBil,4)));
+				pro_num.setText(StaticValues.format(count/uRateBil,4));
+				dialog.dismiss();
+			}
+		});
+		dialog.findViewById(R.id.cancel).setOnClickListener( new OnClickListener(){
+			@Override
+			public void onClick(View v) {
+				dialog.dismiss();
+			}
+		});
+		dialog.findViewById(R.id.recent_sale).setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				Intent intent = new Intent();
+				intent.setClass(ChooseProductAcitivity.this, BaoBiaoItemActivity.class);
+				intent.putExtra("type", BaoBiaoItemActivity.TYPE_MONTH_IN_SALE);
+                if(!(nBilType.equals(StaticValues.ORDER_BILTYPE)
+                        ||nBilType.equals(StaticValues.ORDER_IN_BILTYPE)
+                        ||nBilType.equals(StaticValues.ORDER_RE_BILTYPE)
+                        ||nBilType.equals(StaticValues.TONGJIA_BILTYPE)
+                        ||nBilType.equals(StaticValues.BIANJIA_BILTYPE)
+                )){
+                    intent.putExtra("szUID", uid);
+                }
+				intent.putExtra("szGID", entity.getId());
+				startActivity(intent);
+			}
+		});
+		dialog.show();
+	}
+	
+	@Override
+	public void onBackPressed() {
+		//后退键屏蔽
+		ret.performClick();
+	}
+	
+	/**
+	 * 选择替代商品
+	 */
+	public void search(){
+		Intent intent = new Intent();
+		intent.setClass(this, EntityListActivity.class);
+		intent.putExtra("type", EntityListActivity.PR_RE_CODE);
+		intent.putExtra("nBilType", nBilType);
+		intent.putExtra("szSid", sid);
+		intent.putExtra("szUid", uid);
+		intent.putExtra("search", "");
+		//单选
+		intent.putExtra("pandian", true);
+		intent.putExtra("replace", true);
+		intent.putExtra("szGid", entity.getId());
+		startActivityForResult(intent, EntityListActivity.PR_RE_CODE);
+	}
+	
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		if(resultCode == RESULT_CANCELED){
+			return;
+		}
+		if(requestCode == EntityListActivity.PR_RE_CODE){
+			ArrayList<BaseEntity> re = (ArrayList<BaseEntity>) data.getSerializableExtra("entity");
+			ProductEntity re_entity = (ProductEntity) re.get(0);
+			
+			String action = getString(R.string.product_void_stock);
+			HashMap<String, String> param_void_num = new HashMap<String, String>();
+			param_void_num.put("cMode", "Z");
+			param_void_num.put("szGID", re_entity.getId());
+			param_void_num.put("szSID", sid);
+			param_void_num.put("szOperator", application.getUserEntity()!=null?application.getUserEntity().getId():"");
+			
+			Utils.showProgressDialog("请求虚拟库存……", this);
+			CommunicationServer cs = new CommunicationServer(this, application.getClient(), server+action, param_void_num, new Handler(), new GetProductVoid(re_entity,true));
+			Thread t = new Thread(cs);
+			t.start();
+		}
+	}
+	
+	/**
+	 * 更新编辑上面界面的商品
+	 * @param entity
+	 */
+	public void updateInfo(ProductEntity productEntity){
+		pro_num.setText(productEntity.getNumUnit1()+"");
+	    if(rightCost==1){
+			pro_count.setText(StaticValues.format(productEntity.getPriceRec(), application.getPriceDigit()));
+		}else{
+			pro_count.setText("*");
+			pro_count.setInputType(InputType.TYPE_TEXT_VARIATION_PASSWORD);
+		}
+	    try{
+	    	pro_zhekou.setText(StaticValues.format(productEntity.getDisRec(),application.getPriceDigit()));
+	    }catch(Exception e){
+	    	e.printStackTrace();
+	    }
+	    try{
+	    	  pro_name.setText(productEntity.getFullName());
+	    }catch(Exception e){
+	    	e.printStackTrace();
+	    }
+	    try{
+	    	pro_urate.setText(productEntity.getUnitNameList());
+	    }catch(Exception e){
+	    	e.printStackTrace();
+	    }
+	    try{
+	    	 pro_shuilv.setText(productEntity.getTax()+"");
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		try{
+			 pro_memo.setText(productEntity.getMemo());
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		
+		try{
+			if(productEntity.getLargess().equals("1")){
+				isZengPin.setChecked(true);
+			}
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+	}
+	
+	public void kucunAction(){
+		String action = getString(R.string.product_kucun_action);
+		paramMap.put("cMode", "Z");
+		paramMap.put("szGid", entity.getId());
+		paramMap.put("szOperator", application.getUserEntity().getId());
+		
+		Utils.showProgressDialog("正在请求库存数据……", this);
+		CommunicationServer cs = new CommunicationServer(this,application.getClient(),server+action,paramMap,handler,new GetKuCun());
+		Thread t = new Thread(cs);
+		t.start();
+	}
+	
+	/**
+	 * 获取库存
+	 * @author funever_win8
+	 *
+	 */
+	class GetKuCun extends ExcuteThread{
+		
+		@Override
+		public void run() {
+			try {
+				JSONArray ja = new JSONArray(getJsonString());
+				List<String> kuCunList = new LinkedList<String>();
+				for(int i=0;i<ja.length();i++){
+					JSONObject jo = ja.getJSONObject(i);
+					kuCunList.add(jo.getString("sName")+":"+StaticValues.format(jo.getString("num"), 4));
+				}
+				kuCunList.add("虚拟库存:"+entity.getVoidNum());
+				if(kuCunList.size()>0){
+					showProductInfo(kuCunList,"库存信息");
+				}else{
+					Toast.makeText(ChooseProductAcitivity.this, "没有获取\""+entity.getFullName()+"\"的库存信息!", Toast.LENGTH_SHORT).show();
+				}
+			} catch (JSONException e) {
+				Toast.makeText(ChooseProductAcitivity.this, "获取\""+entity.getFullName()+"\"的库存信息错误!", Toast.LENGTH_SHORT).show();
+			}finally{
+				Utils.dismissProgressDialog();
+			}
+		}
+	}
+	
+	/**
+	 * 获取商品价格
+	 */
+	public void priceAction(){
+		String action = getString(R.string.product_price_action);
+		paramMap.put("cMode", "O");
+		paramMap.put("szGid", entity.getId());
+		paramMap.put("nPriceType", "0");
+		paramMap.put("szOperator", application.getUserEntity().getId());
+		
+		Utils.showProgressDialog("正在请求 价格数据……", this);
+		CommunicationServer cs = new CommunicationServer(this,application.getClient(),server+action,paramMap,handler,new GetProductPrice());
+		Thread t = new Thread(cs);
+		t.start();
+	}
+	
+	/**
+	 * 获取商品的价格信息
+	 * @author funever_win8
+	 *
+	 */
+	class GetProductPrice extends ExcuteThread{
+		@Override
+		public void run() {
+			//[{"lowSalePrice":"0E-10","price1":"0E-10","price2":"0E-10","price3":"0E-10","price4":"0E-10","price5":"0E-10","recSalePrice":"0E-10","retailprice":"0E-10"}]
+			try {
+				JSONArray ja = new JSONArray(getJsonString());
+				if(ja.length()>0){
+					JSONObject jo = ja.getJSONObject(0);
+					List<String> list = new LinkedList<String>();
+					list.add("预设价格1:"+StaticValues.format(jo.getString("price1"), 4));
+					list.add("预设价格2:"+StaticValues.format(jo.getString("price2"), 4));
+					list.add("预设价格3:"+StaticValues.format(jo.getString("price3"), 4));
+					list.add("预设价格4:"+StaticValues.format(jo.getString("price4"), 4));
+					list.add("预设价格5:"+StaticValues.format(jo.getString("price5"), 4));
+					list.add("零售价:"+StaticValues.format(jo.getString("recSalePrice"), 4));
+					list.add("最低销售价:"+StaticValues.format(jo.getString("lowSalePrice"), 4));
+					list.add("最近销售价:"+StaticValues.format(jo.getString("retailprice"), 4));
+					showProductInfo(list,"价格信息");
+				}
+			} catch (Exception e) {
+				Toast.makeText(ChooseProductAcitivity.this, "获取\""+entity.getFullName()+"\"的价格信息错误!", Toast.LENGTH_SHORT).show();
+			}finally{
+				Utils.dismissProgressDialog();
+			}
+		}
+	}
+	
+	public void showProductBeizhu(){
+		Dialog dialog = new Dialog(this, R.style.dialog);
+		View view = LayoutInflater.from(this).inflate(R.layout.product_beizhu_layout, null);
+		dialog.setContentView(view);
+		dialog.getWindow().getAttributes().width = StaticValues.dip2px(this, 300);
+		dialog.getWindow().getAttributes().height = StaticValues.dip2px(this, 350);
+		EditText beizhu = (EditText) dialog.findViewById(R.id.pro_beizhu);
+		beizhu.setText(entity.getMemo());
+		dialog.show();
+	}
+	
+	/**
+	 * 显示库存列表
+	 * @param kuCunList
+	 */
+	public void showProductInfo(List<String> kuCunList,String title){
+		Dialog dialog = new Dialog(this, R.style.dialog);
+		View view = LayoutInflater.from(this).inflate(R.layout.product_kucun_layout, null);
+		dialog.setContentView(view);
+		TextView tv = (TextView) dialog.findViewById(R.id.title);
+		tv.setText(title);
+		ListView lv = (ListView) view.findViewById(R.id.pro_kucun);
+		SimpleTextAdapter sta = new SimpleTextAdapter(kuCunList);
+		lv.setAdapter(sta);
+		dialog.show();
+	}
+	
+	/**
+	 * 显示替换的商品信息
+	 * @param productEntity
+	 */
+	public void showProductInfo(final ProductEntity productEntity){
+		final Dialog dialog = new Dialog(this, R.style.dialog);
+		dialog.setContentView(R.layout.replace_pro_info);
+		
+		TextView pro_name = (TextView) dialog.findViewById(R.id.pro_name);
+		TextView pro_guige = (TextView) dialog.findViewById(R.id.pro_guige);
+		TextView pro_type = (TextView) dialog.findViewById(R.id.pro_type);
+		TextView pro_chandi = (TextView) dialog.findViewById(R.id.pro_chandi);
+		TextView pro_urate = (TextView) dialog.findViewById(R.id.pro_urate);
+		TextView pro_kucun = (TextView) dialog.findViewById(R.id.pro_kucun);
+		TextView pro_void = (TextView) dialog.findViewById(R.id.pro_void);
+		
+		Button replace = (Button) dialog.findViewById(R.id.btn_replace);
+		Button cancel = (Button) dialog.findViewById(R.id.btn_cancel);
+		
+		replace.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				entity = productEntity;
+				updateInfo(productEntity);
+				dialog.dismiss();
+			}
+		});
+		
+		cancel.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				dialog.dismiss();
+			}
+		});
+		
+		pro_name.setText(productEntity.getFullName());
+		pro_guige.setText(productEntity.getStandard());
+		pro_type.setText(productEntity.getType());
+		pro_chandi.setText(productEntity.getArea());
+		pro_urate.setText(productEntity.getuRate());
+		pro_kucun.setText(productEntity.getNum()+"");
+		pro_void.setText(productEntity.getVoidNum());
+		
+		dialog.show();
+	}
+	
+	public class SimpleTextAdapter extends BaseAdapter{
+		
+		private List<String> kuCunList;
+		
+		public SimpleTextAdapter(List<String> kuCunList){
+			this.kuCunList = kuCunList;
+		}
+
+		@Override
+		public int getCount() {
+			return kuCunList.size();
+		}
+
+		@Override
+		public Object getItem(int arg0) {
+			return kuCunList.get(arg0);
+		}
+
+		@Override
+		public long getItemId(int arg0) {
+			return arg0;
+		}
+
+		@Override
+		public View getView(int arg0, View arg1, ViewGroup arg2) {
+			View view = LayoutInflater.from(ChooseProductAcitivity.this).inflate(R.layout.list_text_item, null);
+			TextView title = (TextView) view.findViewById(R.id.title);
+			TextView value = (TextView) view.findViewById(R.id.value);
+			String[] s  = kuCunList.get(arg0).split(":");
+			title.setText(s[0]+":");
+			value.setText(s[1]);
+			return view;
+		}
+	}
+	
+	@Override
+	protected void onResume() {
+		super.onResume();
+		MobclickAgent.onResume(this);
+	}
+	
+	@Override
+	protected void onPause() {
+		super.onPause();
+		MobclickAgent.onPause(this);
+	}
+}

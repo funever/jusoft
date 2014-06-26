@@ -1,0 +1,29 @@
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/svn/!svn/ver/6/trunk/jusoft/trunk/activeAndroid_orm/src/main/java/net/tsz/afinal/db/sqlite
+END
+SqlBuilder.java
+K 25
+svn:wc:ra_dav:version-url
+V 107
+/svn/!svn/ver/6/trunk/jusoft/trunk/activeAndroid_orm/src/main/java/net/tsz/afinal/db/sqlite/SqlBuilder.java
+END
+SqlInfo.java
+K 25
+svn:wc:ra_dav:version-url
+V 104
+/svn/!svn/ver/6/trunk/jusoft/trunk/activeAndroid_orm/src/main/java/net/tsz/afinal/db/sqlite/SqlInfo.java
+END
+CursorUtils.java
+K 25
+svn:wc:ra_dav:version-url
+V 108
+/svn/!svn/ver/6/trunk/jusoft/trunk/activeAndroid_orm/src/main/java/net/tsz/afinal/db/sqlite/CursorUtils.java
+END
+DbModel.java
+K 25
+svn:wc:ra_dav:version-url
+V 104
+/svn/!svn/ver/6/trunk/jusoft/trunk/activeAndroid_orm/src/main/java/net/tsz/afinal/db/sqlite/DbModel.java
+END

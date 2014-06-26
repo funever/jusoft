@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/activeAndroid_orm/activeAndroid_orm.iml" filepath="$PROJECT_DIR$/activeAndroid_orm/activeAndroid_orm.iml" />
+      <module fileurl="file://$PROJECT_DIR$/bluetoochScanner/bluetoochScanner.iml" filepath="$PROJECT_DIR$/bluetoochScanner/bluetoochScanner.iml" />
+      <module fileurl="file://$PROJECT_DIR$/jusoft.iml" filepath="$PROJECT_DIR$/jusoft.iml" />
+      <module fileurl="file://$PROJECT_DIR$/justSoft_gjp/justSoft_gjp.iml" filepath="$PROJECT_DIR$/justSoft_gjp/justSoft_gjp.iml" />
+      <module fileurl="file://$PROJECT_DIR$/pullToRefreshlibrary/pullToRefreshlibrary.iml" filepath="$PROJECT_DIR$/pullToRefreshlibrary/pullToRefreshlibrary.iml" />
+      <module fileurl="file://$PROJECT_DIR$/switchButton/switchButton.iml" filepath="$PROJECT_DIR$/switchButton/switchButton.iml" />
+      <module fileurl="file://$PROJECT_DIR$/viewpagerindicator/viewpagerindicator.iml" filepath="$PROJECT_DIR$/viewpagerindicator/viewpagerindicator.iml" />
+    </modules>
+  </component>
+</project>
+

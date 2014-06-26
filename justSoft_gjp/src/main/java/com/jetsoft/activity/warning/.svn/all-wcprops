@@ -1,0 +1,53 @@
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svn/!svn/ver/6/trunk/jusoft/trunk/justSoft_gjp/src/main/java/com/jetsoft/activity/warning
+END
+SaleWarnViewHolder.java
+K 25
+svn:wc:ra_dav:version-url
+V 114
+/svn/!svn/ver/6/trunk/jusoft/trunk/justSoft_gjp/src/main/java/com/jetsoft/activity/warning/SaleWarnViewHolder.java
+END
+OrderWarningActivity.java
+K 25
+svn:wc:ra_dav:version-url
+V 117
+/svn/!svn/ver/15/trunk/jusoft/trunk/justSoft_gjp/src/main/java/com/jetsoft/activity/warning/OrderWarningActivity.java
+END
+OutTimeViewHolder.java
+K 25
+svn:wc:ra_dav:version-url
+V 113
+/svn/!svn/ver/6/trunk/jusoft/trunk/justSoft_gjp/src/main/java/com/jetsoft/activity/warning/OutTimeViewHolder.java
+END
+OutTimeActivity.java
+K 25
+svn:wc:ra_dav:version-url
+V 112
+/svn/!svn/ver/15/trunk/jusoft/trunk/justSoft_gjp/src/main/java/com/jetsoft/activity/warning/OutTimeActivity.java
+END
+ViewHolderAdatper.java
+K 25
+svn:wc:ra_dav:version-url
+V 113
+/svn/!svn/ver/6/trunk/jusoft/trunk/justSoft_gjp/src/main/java/com/jetsoft/activity/warning/ViewHolderAdatper.java
+END
+OrderWarnViewHolder.java
+K 25
+svn:wc:ra_dav:version-url
+V 115
+/svn/!svn/ver/6/trunk/jusoft/trunk/justSoft_gjp/src/main/java/com/jetsoft/activity/warning/OrderWarnViewHolder.java
+END
+WarnUpDownViewHolder.java
+K 25
+svn:wc:ra_dav:version-url
+V 116
+/svn/!svn/ver/6/trunk/jusoft/trunk/justSoft_gjp/src/main/java/com/jetsoft/activity/warning/WarnUpDownViewHolder.java
+END
+WarnUpDownActivity.java
+K 25
+svn:wc:ra_dav:version-url
+V 115
+/svn/!svn/ver/15/trunk/jusoft/trunk/justSoft_gjp/src/main/java/com/jetsoft/activity/warning/WarnUpDownActivity.java
+END
